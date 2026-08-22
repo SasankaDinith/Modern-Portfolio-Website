@@ -219,7 +219,7 @@ export function HeroSection() {
                 dark:text-[#3B82F6]
               "
             >
-              Sasanka Ranawaka
+              Sasanka Ranawakaa
             </motion.h1>
           </motion.div>
 
