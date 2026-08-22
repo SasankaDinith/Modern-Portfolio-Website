@@ -1,6 +1,7 @@
 import {
   FaGithub,
   FaLinkedinIn,
+  FaMedium,
 } from "react-icons/fa";
 
 import { motion, useReducedMotion } from "motion/react";
@@ -15,6 +16,11 @@ const socialLinks = [
     label: "GitHub",
     href: "https://github.com/SasankaDinith",
     icon: FaGithub,
+  },
+    {
+    label: "Medium",
+    href: "https://medium.com/@sasankad101",
+    icon: FaMedium,
   },
 ] as const;
 
@@ -91,35 +97,7 @@ export function SocialRail() {
         </motion.a>
       ))}
 
-      {/* Medium */}
-      <motion.a
-        href="https://medium.com/@sasankad101"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visit my Medium profile"
-        title="Medium"
-        whileHover={
-          reduceMotion
-            ? undefined
-            : {
-                scale: 1.1,
-                y: -3,
-              }
-        }
-        whileTap={{
-          scale: 0.95,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 220,
-          damping: 18,
-        }}
-        className="grid h-12 w-12 cursor-pointer place-items-center rounded-xl border border-cyan-400/45 bg-slate-950/80 font-serif text-xl font-bold text-slate-100 dark:text-slate-300 shadow-[0_0_20px_rgba(34,211,238,0.08)] backdrop-blur-xl transition-colors duration-300 hover:border-cyan-300 hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-      >
-        M
-
-        
-      </motion.a>
+      
       
       {/* Lower decorative line */}
       <span
