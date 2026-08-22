@@ -128,7 +128,7 @@ export function ContactSection() {
               Follow Me
             </h3>
 
-            <p className="mt-3 text-sm leading-8 text-slate-600 dark:text-slate-400">
+            <p className="mt-3 text-stone-50 leading-8 text-slate-600 dark:text-slate-400">
               Connect with me through my professional and social platforms.
             </p>
 

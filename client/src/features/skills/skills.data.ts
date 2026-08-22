@@ -1,8 +1,7 @@
 import {
   SiAnsible,
   SiDocker,
-  SiExpress,
-  SiFastapi,
+
   SiGit,
   SiGithubactions,
   SiGrafana,
@@ -13,12 +12,12 @@ import {
   SiMongodb,
   SiMysql,
   SiNginx,
-  SiPhp,
+
   SiPrometheus,
   SiPython,
   SiReact,
   SiTerraform,
-  SiTypescript,
+
 } from "react-icons/si";
 
 import {
@@ -26,6 +25,8 @@ import {
   FaCode,
   FaDatabase,
   FaJava,
+  FaAws,
+
 } from "react-icons/fa";
 import { VscAzure } from "react-icons/vsc";
 
@@ -55,6 +56,11 @@ export const skills: Skill[] = [
     id: 5,
     name: "Azure",
     icon: VscAzure,
+  },
+   {
+    id: 5,
+    name: "AWS",
+    icon: FaAws,
   },
   {
     id: 6,
@@ -97,33 +103,16 @@ export const skills: Skill[] = [
     name: "JavaScript",
     icon: SiJavascript,
   },
-  {
-    id: 15,
-    name: "TypeScript",
-    icon: SiTypescript,
-  },
-  {
-    id: 16,
-    name: "PHP",
-    icon: SiPhp,
-  },
+ 
+  
   {
     id: 17,
     name: "React",
     icon: SiReact,
   },
  
-  {
-    id: 19,
-    name: "Express",
-    icon: SiExpress,
-  },
-  
-  {
-    id: 22,
-    name: "FastAPI",
-    icon: SiFastapi,
-  },
+
+
   {
     id: 23,
     name: "MySQL",
@@ -161,7 +150,7 @@ export const skillCategories: SkillCategory[] = [
       "Java",
       "Python",
       "JavaScript",
-      "TypeScript",
+      "C++",
       "PHP",
       "Bash",
     ],
@@ -174,9 +163,8 @@ export const skillCategories: SkillCategory[] = [
       "React",
       "Node.js",
       "Express",
-      "Laravel",
-      "Flutter",
-      "FastAPI",
+      ".NET",
+    
     ],
   },
   {
@@ -184,6 +172,7 @@ export const skillCategories: SkillCategory[] = [
     title: "DevOps & Cloud",
     icon: FaCloud,
     technologies: [
+      "Linux",
       "Docker",
       "Kubernetes",
       "AWS",
@@ -200,7 +189,7 @@ export const skillCategories: SkillCategory[] = [
       "GitHub Actions",
       "Jenkins",
       "Git",
-      "Maven",
+     
     ],
   },
   {
@@ -211,7 +200,7 @@ export const skillCategories: SkillCategory[] = [
       "MongoDB",
       "MySQL",
       "PostgreSQL",
-      "Firebase",
+    
     ],
   },
   {
@@ -222,6 +211,7 @@ export const skillCategories: SkillCategory[] = [
       "Prometheus",
       "Grafana",
       "Nginx",
+      "ELK Stack",
     ],
   },
 ];
