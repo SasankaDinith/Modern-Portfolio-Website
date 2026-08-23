@@ -63,7 +63,7 @@ const edges: NetworkEdge[] = [
   { from: 3, to: 14, delay: 2.5, duration: 6 },
 ];
 
-export function InfrastructureNetworkBackground() {
+export function NetworkBackground() {
   const reduceMotion = useReducedMotion();
 
   const pointerX = useMotionValue(0);
