@@ -137,43 +137,5 @@ export const projects: Project[] = [
     liveUrl: "https://your-portfolio-domain.com",
     featured: false,
   },
-  {
-    id: 10,
-    slug: "terraform-module-library",
-    title: "Terraform Module Library",
-    description:
-      "Reusable Terraform modules for secure networks, compute infrastructure, databases, and application environments.",
-    image: "/projects/terraform-modules.webp",
-    technologies: ["Terraform", "AWS", "IaC", "GitHub Actions"],
-    category: "Automation",
-    githubUrl: "https://github.com/your-username",
-    liveUrl: "https://your-portfolio-domain.com",
-    featured: false,
-  },
-  {
-    id: 11,
-    slug: "api-observability-platform",
-    title: "API Observability Platform",
-    description:
-      "A monitoring system for API latency, errors, availability, request volume, and service-level objectives.",
-    image: "/projects/api-observability.webp",
-    technologies: ["OpenTelemetry", "Prometheus", "Grafana", "Node.js"],
-    category: "Backend",
-    githubUrl: "https://github.com/your-username",
-    liveUrl: "https://your-portfolio-domain.com",
-    featured: false,
-  },
-  {
-    id: 12,
-    slug: "ai-research-platform",
-    title: "AI Research Workflow Platform",
-    description:
-      "A collaborative platform for managing experiments, datasets, research notes, model results, and technical publications.",
-    image: "/projects/ai-research-platform.webp",
-    technologies: ["Python", "AI", "MongoDB", "React"],
-    category: "AI / ML",
-    githubUrl: "https://github.com/your-username",
-    liveUrl: "https://your-portfolio-domain.com",
-    featured: false,
-  },
+ 
 ];
