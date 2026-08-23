@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 
 const roles = [
   "Cloud & DevOps Engineer",
+  "SRE & Observability Enthusiast",
+  "Infrastructure Automation Enthusiast",
   "Technical Writer",
-  "Researcher",
+  "Continuous Learner",
+  "",
 ];
 
 export function AnimatedRole() {
