@@ -195,13 +195,47 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-[100] overflow-visible border-b transition-all duration-300 ${
-          isScrolled || isMenuOpen
-            ? "border-slate-200 bg-white/95 shadow-[0_10px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-blue-400/15 dark:bg-slate-950/95 dark:shadow-[0_10px_40px_rgba(2,6,23,0.45)]"
-            : "border-slate-200/70 bg-white/80 backdrop-blur-xl dark:border-blue-400/10 dark:bg-slate-950/80"
-        }`}
-      >
+
+    <header
+  className={`
+    fixed
+    inset-x-0
+    top-0
+    z-[100]
+    overflow-visible
+    border-b
+    transition-all
+    duration-300
+
+    ${
+      activeSection === "home" &&
+      !isScrolled &&
+      !isMenuOpen
+        ? `
+          border-transparent
+          bg-transparent
+          shadow-none
+          backdrop-blur-none
+
+          dark:border-transparent
+          dark:bg-transparent
+          dark:shadow-none
+        `
+        : `
+          border-slate-200
+          bg-white/95
+          shadow-[0_8px_30px_rgba(15,23,42,0.07)]
+          backdrop-blur-xl
+
+          dark:border-blue-400/15
+          dark:bg-slate-950/95
+          dark:shadow-[0_8px_30px_rgba(2,6,23,0.35)]
+        `
+    }
+  `}
+>
+     
+
         <nav
           className="
             mx-auto
@@ -224,11 +258,34 @@ export function Navbar() {
           "
           aria-label="Primary navigation"
         >
-          {/* Logo */}
-          <div className="flex min-w-0 items-center">
-            <Logo />
-          </div>
+         {/* Logo */}
+{/* Logo */}
+<div
+  className="
+  inline-flex
+  cursor-pointer
+  items-center
+  justify-center
+  whitespace-nowrap
+  bg-transparent
+  p-0
 
+  font-mono
+  text-[36px]
+  font-extrabold
+  tracking-[-0.06em]
+
+  sm:text-[30px]
+  lg:text-[30px]
+  xl:text-[30px]
+"
+>
+  <Logo
+    onClick={() =>
+      navigateToSection("home")
+    }
+  />
+</div>
           {/* Desktop navigation */}
           <div className="hidden min-w-0 justify-center xl:flex">
             <div className="flex items-center justify-center gap-5">
@@ -274,41 +331,56 @@ export function Navbar() {
           </div>
 
           {/* Desktop actions */}
-          <div className="hidden shrink-0 items-center justify-end gap-3 xl:flex">
-            <a
-              href="/documents/sasanka-ranawaka-cv.pdf"
-              download
-              className="
-                inline-flex
-                min-h-12
-                items-center
-                gap-2
-                whitespace-nowrap
-                rounded-xl
-                bg-gradient-to-r
-                from-blue-600
-                to-indigo-600
-                px-5
-                text-sm
-                font-semibold
-                text-white
-                shadow-[0_0_25px_rgba(37,99,235,0.25)]
-                transition
-                duration-300
+{/* Desktop actions */}
+<div
+  className="
+    hidden
+    shrink-0
+    items-center
+    justify-end
+    gap-3
 
-                hover:-translate-y-0.5
-              "
-            >
-              Download CV
+    xl:flex
+    xl:pr-8
 
-              <Download
-                size={18}
-                aria-hidden="true"
-              />
-            </a>
+    2xl:pr-12
+  "
+>
+  {/* Theme toggle */}
+  <ThemeToggle />
 
-            <ThemeToggle />
-          </div>
+  {/* Download CV */}
+  <a
+    href="/documents/sasanka-ranawaka-cv.pdf"
+    download
+    className="
+      inline-flex
+      min-h-12
+      items-center
+      gap-2
+      whitespace-nowrap
+      rounded-xl
+      bg-gradient-to-r
+      from-blue-600
+      to-indigo-600
+      px-5
+      text-sm
+      font-semibold
+      text-white
+      shadow-[0_0_25px_rgba(37,99,235,0.25)]
+      transition
+      duration-300
+      hover:-translate-y-0.5
+    "
+  >
+    Download CV
+
+    <Download
+      size={18}
+      aria-hidden="true"
+    />
+  </a>
+</div>
 
           {/* Mobile menu button */}
           <button

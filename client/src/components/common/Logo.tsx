@@ -1,54 +1,59 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 
-import devxLogo from "../../assets/images/logo.png";
+type LogoProps = {
+  onClick?: () => void;
+};
 
-interface LogoProps {
-  className?: string;
-}
-
-export function Logo({ className = "" }: LogoProps) {
-  const reduceMotion = useReducedMotion();
-
-  const scrollToHome = () => {
-    document.getElementById("home")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
+export function Logo({
+  onClick,
+}: LogoProps) {
   return (
     <motion.button
       type="button"
-      onClick={scrollToHome}
-      whileHover={
-        reduceMotion
-          ? undefined
-          : {
-              scale: 1.07,
-              y: -3,
-            }
-      }
-      whileTap={
-        reduceMotion
-          ? undefined
-          : {
-              scale: 0.97,
-            }
-      }
-      transition={{
-        type: "spring",
-        stiffness: 190,
-        damping: 18,
-        mass: 0.7,
+      onClick={onClick}
+      whileHover={{
+        scale: 1.05,
       }}
-      className={`group flex h-20 w-full cursor-pointer items-center justify-center border-0 bg-transparent p-0 outline-none ${className}`}
-      aria-label="Go to portfolio home"
+      whileTap={{
+        scale: 0.98,
+      }}
+      transition={{
+        duration: 0.25,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="
+        inline-flex
+        cursor-pointer
+        items-center
+        justify-center
+        whitespace-nowrap
+        bg-transparent
+        p-0
+
+        font-mono
+        text-[31px]
+        font-extrabold
+        tracking-[-0.06em]
+
+        outline-none
+
+        sm:text-[34px]
+        lg:text-[36px]
+        xl:text-[38px]
+      "
+      aria-label="Go to home"
     >
-      <img
-        src={devxLogo}
-        alt="Dev X logo"
-        className="block h-auto w-[190px] max-w-none object-contain transition-[filter] duration-500 group-hover:drop-shadow-[0_0_18px_rgba(34,211,238,0.65)]"
-      />
+      <span className="text-cyan-500 dark:text-cyan-400">
+        {"<"}
+      </span>
+
+      <span className="text-cyan-500 dark:text-cyan-400">
+        Dev_X
+      </span>
+
+      <span className="text-cyan-500 dark:text-cyan-400">
+        {"/>"}
+      </span>
     </motion.button>
   );
 }

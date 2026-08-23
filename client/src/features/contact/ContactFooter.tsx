@@ -5,6 +5,9 @@ import {
   footerResourceLinks,
 } from "./contact.data";
 
+import { ArrowUp } from "lucide-react";
+import { motion } from "motion/react";
+
 function scrollToSection(sectionId: string) {
   document.getElementById(sectionId)?.scrollIntoView({
     behavior: "smooth",
@@ -13,8 +16,76 @@ function scrollToSection(sectionId: string) {
 }
 
 export function ContactFooter() {
+
+
+  const scrollToHero = () => {
+  const hero = document.getElementById("home");
+
+  if (!hero) return;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
   return (
+
+
+    
     <footer className="relative mt-10">
+
+
+      <motion.button
+  type="button"
+  onClick={scrollToHero}
+  whileHover={{
+    scale: 1.08,
+  }}
+  whileTap={{
+    scale: 0.94,
+  }}
+  transition={{
+    duration: 0.2,
+  }}
+  aria-label="Back to top"
+  title="Back to top"
+  className="
+    group
+    absolute
+    bottom-8
+    right-8
+
+    flex
+    h-12
+    w-12
+    cursor-pointer
+    items-center
+    justify-center
+
+    rounded-full
+    bg-red-600
+    text-white
+
+    shadow-[0_8px_25px_rgba(220,38,38,0.30)]
+
+    transition-all
+    duration-300
+
+    hover:bg-red-500
+    hover:shadow-[0_10px_35px_rgba(239,68,68,0.42)]
+  "
+>
+  <ArrowUp
+    size={24}
+    strokeWidth={2.5}
+    className="
+      transition-transform
+      duration-300
+      group-hover:-translate-y-0.5
+    "
+    aria-hidden="true"
+  />
+</motion.button>
       {/* Top divider line */}
       <div
         className="h-px w-full bg-gradient-to-r from-cyan-400/70 via-blue-500/40 to-purple-500/70"
@@ -33,10 +104,9 @@ export function ContactFooter() {
           </button>
 
           <p className="mt-5 max-w-md leading-7 text-slate-400">
-            Building secure and reliable cloud infrastructure,
-            automating delivery workflows, and sharing practical
-            engineering knowledge through technical writing and
-            research.
+            Building reliable cloud-native infrastructure, automating delivery and operations,
+            and exploring observability, AI-driven engineering, and practical solutions to 
+            real-world infrastructure challenges.
           </p>
 
           {/* Footer social icons */}
@@ -103,7 +173,13 @@ export function ContactFooter() {
             Sasanka Ranawaka
           </span>
         </p>
+
+
+        
       </div>
+
+
+      
     </footer>
   );
 }
