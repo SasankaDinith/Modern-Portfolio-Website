@@ -34,57 +34,61 @@ export function ContactFooter() {
       ========================== */}
 
       <motion.button
-        type="button"
-        onClick={scrollToHero}
-        whileHover={{
-          scale: 1.08,
-        }}
-        whileTap={{
-          scale: 0.94,
-        }}
-        transition={{
-          duration: 0.2,
-        }}
-        aria-label="Back to top"
-        title="Back to top"
-        className="
-          group
-          absolute
-          bottom-8
-          right-8
-          z-20
+  type="button"
+  onClick={scrollToHero}
+  whileHover={{
+    scale: 1.08,
+  }}
+  whileTap={{
+    scale: 0.94,
+  }}
+  transition={{
+    duration: 0.3,
+  }}
+  aria-label="Back to top"
+  title="Back to top"
+  className="
+    group
+    absolute
+    bottom-[45px]
+    right-[15px]
+    z-20
 
-          flex
-          h-[52px]
-          w-[52px]
-          cursor-pointer
-          items-center
-          justify-center
+    flex
+    h-[52px]
+    w-[52px]
+    cursor-pointer
+    items-center
+    justify-center
 
-          rounded-full
-          bg-red-600
-          text-white
+    rounded-full
+    border
+    border-cyan-400/35
 
-          shadow-[0_8px_25px_rgba(220,38,38,0.30)]
+    bg-slate-950
+    text-white
 
-          transition-all
-          duration-300
+    shadow-[0_8px_28px_rgba(2,6,23,0.45)]
 
-          hover:bg-red-500
-          hover:shadow-[0_10px_35px_rgba(239,68,68,0.42)]
-        "
-      >
-        <ArrowUp
-          size={24}
-          strokeWidth={2.5}
-          className="
-            transition-transform
-            duration-300
-            group-hover:-translate-y-0.5
-          "
-          aria-hidden="true"
-        />
-      </motion.button>
+    transition-all
+    duration-300
+
+    hover:border-cyan-400/70
+    hover:bg-slate-900
+    hover:shadow-[0_10px_35px_rgba(34,211,238,0.16)]
+  "
+>
+  <ArrowUp
+    size={24}
+    strokeWidth={2.5}
+    className="
+      transition-transform
+      duration-300
+      group-hover:-translate-y-0.5
+    "
+    aria-hidden="true"
+  />
+</motion.button>
 
       {/* =========================
           TOP DIVIDER
@@ -341,71 +345,60 @@ export function ContactFooter() {
         </div>
       </div>
 
-      {/* =========================
-          BOTTOM DIVIDER
-      ========================== */}
+     {/* Bottom divider line */}
+<div
+  className="
+    mx-auto
+    h-px
+    w-[calc(100%-3rem)]
+    max-w-[1350px]
 
-      <div
-        className="
-          mx-auto
-          h-px
-          w-[calc(100%-3rem)]
-          max-w-[1350px]
+    bg-gradient-to-r
+    from-cyan-400/70
+    via-blue-500/35
+    to-purple-500/70
 
-          bg-gradient-to-r
-          from-cyan-400/70
-          via-blue-500/35
-          to-purple-500/70
+    md:w-[calc(100%-5rem)]
+    lg:w-[calc(100%-8rem)]
+  "
+  aria-hidden="true"
+/>
 
-          md:w-[calc(100%-5rem)]
-          lg:w-[calc(100%-8rem)]
-        "
-        aria-hidden="true"
-      />
+{/* Copyright */}
+<div
+  className="
+    mx-auto
+    flex
+    w-[calc(100%-3rem)]
+    max-w-[1350px]
+    flex-col
+    gap-4
+    py-6
 
-      {/* =========================
-          COPYRIGHT
-      ========================== */}
+    text-sm
+    text-slate-600
 
-      <div
-        className="
-          mx-auto
-          flex
-          w-full
-          max-w-[1460px]
-          flex-col
-          gap-4
+    dark:text-slate-400
 
-          px-6
-          py-6
+    md:w-[calc(100%-5rem)]
+    md:flex-row
+    md:items-center
+    md:justify-between
 
-          text-sm
-          text-slate-600
+    lg:w-[calc(100%-8rem)]
+  "
+>
+  <p>
+    © 2026 Sasanka Ranawaka. All rights reserved.
+  </p>
 
-          dark:text-slate-400
-
-          md:flex-row
-          md:items-center
-          md:justify-between
-          md:px-10
-
-          lg:px-16
-
-          2xl:px-14
-        "
-      >
-        <p>
-          © 2026 Sasanka Ranawaka. All rights
-          reserved.
-        </p>
-
-        <p className="pr-16 md:pr-20">
-          Designed &amp; Built by{" "}
-          <span className="text-cyan-500 dark:text-cyan-400">
-            Sasanka Ranawaka
-          </span>
-        </p>
-      </div>
+  <p className="text-right">
+    Designed &amp; Built by{" "}
+    <span className="text-cyan-500 dark:text-cyan-400">
+      Sasanka Ranawaka
+    </span>
+  </p>
+</div>
     </footer>
   );
 }
