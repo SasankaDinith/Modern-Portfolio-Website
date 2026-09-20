@@ -61,7 +61,7 @@ ${subject}
 Message:
 ${message}
 
---------------------------------
+----------------------------------------------
 Sent from Sasanka Ranawaka's portfolio website.
       `,
     };
