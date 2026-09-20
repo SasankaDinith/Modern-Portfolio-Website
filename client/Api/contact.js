@@ -18,7 +18,7 @@ export default async function handler(
       subject,
       phone,
       message,
-    } = req.body;
+    } = req.body ?? {};
 
     if (
       !name ||
@@ -33,14 +33,27 @@ export default async function handler(
       });
     }
 
+    if (
+      !process.env.GMAIL_USER ||
+      !process.env.GMAIL_APP_PASSWORD
+    ) {
+      console.error(
+        "Gmail environment variables are missing.",
+      );
+
+      return res.status(500).json({
+        success: false,
+        message:
+          "Email service is not configured.",
+      });
+    }
+
     const transporter =
       nodemailer.createTransport({
         service: "gmail",
 
         auth: {
-          user:
-            process.env.GMAIL_USER,
-
+          user: process.env.GMAIL_USER,
           pass:
             process.env
               .GMAIL_APP_PASSWORD,
@@ -58,7 +71,7 @@ export default async function handler(
         `Portfolio Contact: ${subject}`,
 
       text: `
-New portfolio contact message
+New Portfolio Contact Message
 
 Name:
 ${name}
@@ -74,7 +87,7 @@ ${subject}
 
 Message:
 ${message}
-      `,
+      `.trim(),
     });
 
     return res.status(200).json({
@@ -91,7 +104,7 @@ ${message}
     return res.status(500).json({
       success: false,
       message:
-        "Unable to send your message.",
+        "Unable to send your message. Please try again later.",
     });
   }
 }

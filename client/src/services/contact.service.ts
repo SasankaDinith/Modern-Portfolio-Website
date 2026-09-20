@@ -38,6 +38,11 @@ export async function sendContactMessage(
       "application/json",
     )
   ) {
+    console.error(
+      "Unexpected contact response:",
+      await response.text(),
+    );
+
     throw new Error(
       "Contact server returned an invalid response.",
     );
