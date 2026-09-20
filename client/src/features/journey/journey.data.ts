@@ -101,6 +101,14 @@ export const education: TimelineSection = {
 };
 
 export const certifications: Certification[] = [
+
+
+   {
+    id: 1,
+    title: "Red Hat Certified System Administrator (EX200) Exam Preparation",
+    issuer: "LinkedIn Learning",
+    verificationUrl: "https://www.linkedin.com/learning/certificates/eb3615205d4991877dd4d14fca6879bd1bec123b163d17d736c6824a81a1b3d4?trk=share_certificate",
+  },
   {
     id: 1,
     title: "Kubernetes and Cloud Native Associate (KCNA) Cert Preparation",
@@ -219,10 +227,10 @@ export const certifications: Certification[] = [
 export const honorsRecognitions: HonorRecognition[] = [
   {
     id: 1,
-    title: "5th Ranked Cloud & DevOps Engineering Creator in Sri Lanka",
+    title: "4th Ranked Cloud & DevOps Engineering Creator in Sri Lanka",
     issuer: "Favikon",
     description:
-      "Ranked #5 among Cloud & DevOps Engineering creators in Sri Lanka by Favikon's Top 200 Creators ranking. This recognition reflects my contributions to the professional community through sharing knowledge, insights, and content related to Cloud Computing, DevOps practices, Networking, and emerging technologies on LinkedIn.",
+      "Ranked #4 among Cloud & DevOps Engineering creators in Sri Lanka by Favikon's Top 200 Creators ranking. This recognition reflects my contributions to the professional community through sharing knowledge, insights, and content related to Cloud Computing, DevOps practices, Networking, and emerging technologies on LinkedIn.",
     image: "/Honours/Favikon.png",
     link: "https://www.favikon.com/",
   },
