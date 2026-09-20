@@ -14,21 +14,34 @@ interface ContactResponse {
 export async function sendContactMessage(
   data: ContactFormData,
 ): Promise<ContactResponse> {
-  const apiUrl =
-    import.meta.env.VITE_API_URL;
-
   const response = await fetch(
-    `${apiUrl}/api/contact`,
+    "/api/contact",
     {
       method: "POST",
 
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type":
+          "application/json",
       },
 
       body: JSON.stringify(data),
     },
   );
+
+  const contentType =
+    response.headers.get(
+      "content-type",
+    );
+
+  if (
+    !contentType?.includes(
+      "application/json",
+    )
+  ) {
+    throw new Error(
+      "Contact server returned an invalid response.",
+    );
+  }
 
   const result =
     (await response.json()) as ContactResponse;
