@@ -66,6 +66,7 @@ export function SkillCategoryCard({
     >
       <h3
         className={`
+          space-grotesk-bold
           text-xl
           font-bold
           sm:text-2xl

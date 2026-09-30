@@ -91,7 +91,7 @@ export function JourneySection() {
             My Journey
           </span>
 
-          <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
+          <h2 className="mt-5 space-grotesk-bold text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
             Professional{" "}
             <span className="text-[#168BFF]">
               Journey
@@ -157,7 +157,7 @@ export function JourneySection() {
     </div>
 
     <div>
-      <h3 className="text-2xl font-bold text-slate-950 dark:text-white">
+      <h3 className="space-grotesk-bold text-2xl font-bold text-slate-950 dark:text-white">
         Honors & Recognition
       </h3>
 
@@ -218,7 +218,7 @@ export function JourneySection() {
               <Award size={26} />
             </div>
 
-            <h3 className="text-2xl font-bold text-slate-950 dark:text-white">
+            <h3 className="space-grotesk-bold text-2xl font-bold text-slate-950 dark:text-white">
               Certifications
             </h3>
           </div>

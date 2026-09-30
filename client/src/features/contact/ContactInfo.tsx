@@ -107,7 +107,7 @@ export function ContactInfo() {
           <Users size={30} />
         </div>
 
-        <h3 className="text-3xl font-bold leading-tight text-slate-950 dark:text-white">
+        <h3 className="space-grotesk-bold text-3xl font-bold leading-tight text-slate-950 dark:text-white">
           Let’s work
           <br />
           together

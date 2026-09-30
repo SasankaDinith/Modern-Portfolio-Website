@@ -80,7 +80,7 @@ export function ContactSection() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
+          <h2 className="space-grotesk-bold text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
             Let’s Build Something{" "}
             <span className="text-[#168BFF]">
               Amazing Together
@@ -127,6 +127,7 @@ export function ContactSection() {
 >
   <h3
     className="
+      space-grotesk-bold
       text-2xl
       font-bold
       text-slate-950
@@ -170,7 +171,7 @@ export function ContactSection() {
     dark:shadow-[0_20px_70px_rgba(2,6,23,0.4)]
   "
 >
-  <h3 className="text-2xl font-bold text-slate-800 dark:text-white">
+  <h3 className="space-grotesk-bold text-2xl font-bold text-slate-800 dark:text-white">
     Find Me
   </h3>
 

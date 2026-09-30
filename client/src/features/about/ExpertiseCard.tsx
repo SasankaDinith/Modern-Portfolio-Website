@@ -92,15 +92,16 @@ export function ExpertiseCard({
         </div>
 
         <h3
-          className={`
-            text-xl font-bold sm:text-2xl
+            className="
+    space-grotesk-bold
+    text-xl
+    tracking-[-0.02em]
+    text-blue-600
 
-            ${
-              isBlue
-                ? "text-blue-600 dark:text-blue-400"
-                : "text-cyan-600 dark:text-cyan-400"
-            }
-          `}
+    dark:text-cyan-300
+
+    sm:text-2xl
+  "
         >
           {title}
         </h3>

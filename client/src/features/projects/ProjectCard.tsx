@@ -231,7 +231,7 @@ export function ProjectCard({
 
       {/* Card content */}
 <div className="flex flex-1 flex-col p-5">
-  <h3 className="line-clamp-2 text-xl font-bold leading-7 text-slate-950 dark:text-white">
+  <h3 className="space-grotesk-bold line-clamp-2 text-xl font-bold leading-7 text-slate-950 dark:text-white">
     {project.title}
   </h3>
 

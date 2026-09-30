@@ -185,7 +185,7 @@ export function ContactForm() {
         sm:p-8
       "
     >
-      <h3 className="text-3xl font-bold text-slate-950 dark:text-white">
+      <h3 className="space-grotesk-bold text-3xl font-bold text-slate-950 dark:text-white">
         Contact Me!
       </h3>
 

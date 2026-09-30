@@ -160,79 +160,99 @@ export function HeroSection() {
       >
         {/* Left side */}
         <motion.div
-          variants={reduceMotion ? undefined : containerVariants}
-          initial={reduceMotion ? false : "hidden"}
-          animate={reduceMotion ? undefined : "visible"}
+          variants={
+            reduceMotion
+              ? undefined
+              : containerVariants
+          }
+          initial={
+            reduceMotion
+              ? false
+              : "hidden"
+          }
+          animate={
+            reduceMotion
+              ? undefined
+              : "visible"
+          }
           className="max-w-3xl 2xl:pl-8"
         >
-          {/* 0.15s */}
-          <motion.p
-            variants={reduceMotion ? undefined : itemVariants}
-            className="
-              mb-4
-              text-lg
-              font-medium
-              text-slate-700
+         <motion.p
+  variants={itemVariants}
+  className="
+    space-grotesk-bold
+    text-[24px]
+    leading-none
+    tracking-[-0.02em]
+    text-slate-900
+    dark:text-white
 
-              dark:text-slate-300
-            "
-          >
-            Hi I’m,
-          </motion.p>
+    sm:text-[28px]
+    lg:text-[30px]
+  "
+>
+  Hi, I’m
+</motion.p>
+          {/* Name */}
+          <motion.div className="overflow-hidden">
+<motion.h1
+  initial={{
+    y: "105%",
+  }}
+  animate={{
+    y: 0,
+  }}
+  transition={{
+    duration: 0.8,
+    delay: 0.27,
+    ease: [0.22, 1, 0.36, 1],
+  }}
+  className="
+    hero-space-grotesk
 
-          {/* 0.27s - masked name reveal */}
-          <motion.div
-            variants={reduceMotion ? undefined : itemVariants}
-            className="overflow-hidden pb-2"
-          >
-            <motion.h1
-              initial={
-                reduceMotion
-                  ? false
-                  : {
-                      opacity: 0,
-                      y: "105%",
-                    }
-              }
-              animate={
-                reduceMotion
-                  ? undefined
-                  : {
-                      opacity: 1,
-                      y: 0,
-                    }
-              }
-              transition={{
-                duration: 0.85,
-                delay: 0.27,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="
-                text-5xl
-                font-bold
-                tracking-tight
-                text-[#2563EB]
+    mt-4
 
-                sm:text-6xl
-                xl:text-7xl
+    bg-gradient-to-r
+    from-[#2F6FF0]
+    via-[#2389EE]
+    to-[#10B6E8]
 
-                dark:text-[#3B82F6]
-              "
-            >
-              Sasanka Ranawaka
-            </motion.h1>
+    bg-clip-text
+    text-transparent
+
+    text-[52px]
+    leading-[0.98]
+    font-bold
+    tracking-[-0.03em]
+
+    sm:text-[62px]
+    md:text-[70px]
+    lg:text-[74px]
+    xl:text-[72px]
+  "
+>
+  Sasanka Ranawaka 
+</motion.h1>
           </motion.div>
 
-          {/* 0.39s */}
+          {/* Animated role */}
           <motion.div
-            variants={reduceMotion ? undefined : itemVariants}
+            variants={
+              reduceMotion
+                ? undefined
+                : itemVariants
+            }
           >
             <AnimatedRole />
           </motion.div>
 
-          {/* 0.51s */}
+          {/* Description */}
           <motion.p
-            variants={reduceMotion ? undefined : itemVariants}
+            variants={
+              reduceMotion
+                ? undefined
+                : itemVariants
+            }
             className="
               mt-8
               max-w-xl
@@ -245,13 +265,19 @@ export function HeroSection() {
               sm:text-xl
             "
           >
-            Building scalable cloud infrastructure, automating deployments,
-            and sharing knowledge through technical writing.
+            Building scalable cloud
+            infrastructure, automating
+            deployments, and sharing knowledge
+            through technical writing.
           </motion.p>
 
-          {/* 0.63s */}
+          {/* Buttons */}
           <motion.div
-            variants={reduceMotion ? undefined : itemVariants}
+            variants={
+              reduceMotion
+                ? undefined
+                : itemVariants
+            }
             className="mt-10 flex flex-col gap-4 sm:flex-row"
           >
             {/* View Projects */}

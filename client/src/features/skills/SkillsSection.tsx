@@ -77,7 +77,7 @@ export function SkillsSection() {
             My Skills
           </span>
 
-          <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
+          <h2 className="mt-5 space-grotesk-bold text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
             Technical{" "}
             <span className="text-[#168BFF]">
               Expertise

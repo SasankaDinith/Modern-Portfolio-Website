@@ -83,7 +83,7 @@ export function TimelineCard({
           <Icon size={25} />
         </div>
 
-        <h3 className="text-2xl font-bold text-slate-950 dark:text-white">
+        <h3 className="space-grotesk-bold text-2xl font-bold text-slate-950 dark:text-white">
           {section.title}
         </h3>
       </div>
@@ -159,7 +159,7 @@ export function TimelineCard({
                   {entry.period}
                 </p>
 
-                <h4 className="mt-2 text-lg font-bold leading-7 text-slate-950 dark:text-white">
+                <h4 className="mt-2 space-grotesk-bold text-lg font-bold leading-7 text-slate-950 dark:text-white">
                   {entry.title}
                 </h4>
 

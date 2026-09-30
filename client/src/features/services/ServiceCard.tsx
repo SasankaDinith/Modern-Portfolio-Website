@@ -90,6 +90,7 @@ export function ServiceCard({
 
         <h3
           className="
+            space-grotesk-bold
             text-2xl
             font-bold
             leading-8

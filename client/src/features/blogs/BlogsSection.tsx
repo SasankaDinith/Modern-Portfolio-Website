@@ -84,7 +84,7 @@ export function BlogsSection() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
+          <h2 className="space-grotesk-bold text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
             Latest{" "}
             <span className="text-[#168BFF]">
               Blog Posts

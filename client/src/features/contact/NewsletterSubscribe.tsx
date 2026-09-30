@@ -45,6 +45,7 @@ export function NewsletterSubscribe() {
       {/* Heading */}
       <h3
         className="
+          space-grotesk-bold
           text-lg
           font-bold
           text-slate-950

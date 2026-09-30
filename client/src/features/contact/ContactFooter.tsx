@@ -286,6 +286,7 @@ export function ContactFooter() {
         <div>
           <h3
             className="
+              space-grotesk-bold
               text-lg
               font-bold
               text-slate-950

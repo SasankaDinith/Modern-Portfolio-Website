@@ -80,23 +80,22 @@ export function AboutSection() {
 
           {/* Main heading */}
           <h2
-            className="
-              mt-6
-              text-4xl
-              font-bold
-              tracking-tight
-              text-slate-950
+           className="
+            mt-8
+    space-grotesk-bold
+    text-4xl
+    tracking-tight
+    text-slate-950
+    dark:text-white
 
-              dark:text-white
-
-              sm:text-5xl
-              lg:text-6xl
-            "
-          >
-            Technical{" "}
-            <span className="text-[#168BFF]">
-              Expertise
-            </span>
+    sm:text-5xl
+    lg:text-6xl
+  "
+>
+  Technical{" "}
+  <span className="text-[#168BFF]">
+    Expertise
+  </span>
           </h2>
 
           {/* Description */}

@@ -152,7 +152,7 @@ export function HonorRecognitionCard({
 
         {/* Content */}
         <div className="flex flex-col justify-center">
-          <h4 className="text-xl font-bold leading-7 text-slate-950 dark:text-white">
+          <h4 className="space-grotesk-bold text-xl font-bold leading-7 text-slate-950 dark:text-white">
             {honor.title}
           </h4>
 

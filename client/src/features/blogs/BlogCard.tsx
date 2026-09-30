@@ -158,7 +158,7 @@ export function BlogCard({
         </div>
 
         {/* Title */}
-        <h3 className="mt-4 line-clamp-2 text-xl font-bold leading-8 text-slate-950 dark:text-white">
+        <h3 className="mt-4 space-grotesk-bold line-clamp-2 text-xl font-bold leading-8 text-slate-950 dark:text-white">
           {article.title}
         </h3>
 

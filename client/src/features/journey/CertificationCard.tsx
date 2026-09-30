@@ -65,7 +65,7 @@ export function CertificationCard({
   dark:hover:bg-blue-950/20
 "
     >
-      <h3 className="text-lg font-bold leading-7 text-slate-950 dark:text-white">
+      <h3 className="space-grotesk-bold text-lg font-bold leading-7 text-slate-950 dark:text-white">
         {certification.title}
       </h3>
 
