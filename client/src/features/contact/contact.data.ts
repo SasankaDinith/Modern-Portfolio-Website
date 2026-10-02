@@ -45,7 +45,7 @@ export const socialLinks = [
 export const footerNavigationLinks = [
   { label: "Home", sectionId: "home" },
   { label: "About", sectionId: "about" },
-  { label: "Services", sectionId: "services" },
+{  label: "Leadership", sectionId: "leadership",},
   { label: "Projects", sectionId: "projects" },
   { label: "Contact", sectionId: "contact" },
 ] as const;

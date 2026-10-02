@@ -21,14 +21,15 @@ export const navigationItems: NavigationItem[] = [
     label: "Projects",
     sectionId: "projects",
   },
-   {
-    label: "Services",
-    sectionId: "services",
-  },
+ 
   {
     label: "Skills",
     sectionId: "skills",
   },
+  {
+  label: "Leadership",
+  sectionId: "leadership",
+},
   {
     label: "Blogs",
     sectionId: "blogs",

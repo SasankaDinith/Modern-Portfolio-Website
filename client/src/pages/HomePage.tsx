@@ -4,8 +4,9 @@ import { ContactSection } from "../features/contact/ContactSection";
 import { HeroSection } from "../features/hero/HeroSection";
 import { JourneySection } from "../features/journey/JourneySection";
 import { ProjectsSection } from "../features/projects/ProjectsSection";
-import { ServicesSection } from "../features/services/ServicesSection";
+// import { ServicesSection } from "../features/services/ServicesSection";
 import { SkillsSection } from "../features/skills/SkillsSection";
+import { LeadershipSection } from "../features/leadership/LeadershipSection";
 import { PortfolioBackground } from "../components/layout/PortfolioBackground";
 
 import { SocialRail } from "../components/common/SocialRail";
@@ -24,8 +25,8 @@ export default function HomePage() {
         <AboutSection />
         <JourneySection />
         <ProjectsSection />
-        <ServicesSection />
         <SkillsSection />
+        <LeadershipSection />
         <BlogsSection />
         <ContactSection />
       </main>
