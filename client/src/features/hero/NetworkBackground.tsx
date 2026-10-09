@@ -6,6 +6,7 @@ import {
   Database,
   GitBranch,
   Server,
+  BarChart2,
 } from "lucide-react";
 import {
   motion,
@@ -33,9 +34,9 @@ type InfrastructureSymbol = {
    PARTICLE SETTINGS
 ========================= */
 
-const PARTICLE_SPEED = 1.3;
-const CONNECTION_DISTANCE = 175;
-const POINTER_RANGE = 220;
+const PARTICLE_SPEED = 1.8;
+const CONNECTION_DISTANCE = 185;
+const POINTER_RANGE = 250;
 
 /* =========================
    INFRASTRUCTURE SYMBOLS
@@ -84,6 +85,14 @@ const symbols: InfrastructureSymbol[] = [
   },
   {
     Icon: Database,
+    left: "91%",
+    top: "63%",
+    delay: 2.5,
+    duration: 7.2,
+    size: 31,
+  },
+   {
+    Icon: BarChart2,
     left: "91%",
     top: "63%",
     delay: 2.5,
@@ -141,11 +150,11 @@ export function NetworkBackground() {
       y: Math.random() * height,
 
       vx:
-        (Math.random() - 0.5) *
+        (Math.random() - 0.9) *
         PARTICLE_SPEED,
 
       vy:
-        (Math.random() - 0.5) *
+        (Math.random() - 0.9) *
         PARTICLE_SPEED,
 
       radius:
@@ -560,7 +569,7 @@ export function NetworkBackground() {
               }
         }
         transition={{
-          duration: 9,
+          duration: 5,
           repeat:
             Number.POSITIVE_INFINITY,
           ease: "easeInOut",
