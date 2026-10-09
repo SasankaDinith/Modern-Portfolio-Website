@@ -44,35 +44,29 @@ export function NewsletterSubscribe() {
     <div className="w-full">
       {/* Heading */}
       <h3
-        className="
-          space-grotesk-bold
-          text-lg
-          font-bold
-          text-slate-950
-
-          dark:text-white
-        "
-      >
-        Subscribe to My Newsletter
-      </h3>
+  className="
+    text-xl
+       space-grotesk-bold
+    font-bold
+    text-white
+  "
+>
+  Subscribe to My Newsletter
+</h3>
 
       {/* Description */}
-      <p
-        className="
-          mt-3
-          max-w-sm
-          text-sm
-          leading-6
-          text-slate-600
-
-          dark:text-slate-400
-        "
-      >
-        Get occasional updates on Cloud,
-        DevOps, SRE, observability, and
-        technical content directly in your
-        inbox.
-      </p>
+     <p
+  className="
+    mt-2
+    text-sm
+    leading-7
+    text-slate-400
+  "
+>
+  Get occasional updates on Cloud, DevOps, SRE,
+  observability, and technical content directly in your
+  inbox.
+</p>
 
       {/* Form */}
       <form
