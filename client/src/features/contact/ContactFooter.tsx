@@ -1,23 +1,13 @@
-import { ArrowUp } from "lucide-react";
+import {
+  ArrowUp,
+} from "lucide-react";
+
+
+
 import { motion } from "motion/react";
 
-import {
-  footerNavigationLinks,
-  footerResourceLinks,
-} from "./contact.data";
-
-
-
+import { FooterStatement } from "./FooterStatement";
 import { NewsletterSubscribe } from "./NewsletterSubscribe";
-
-function scrollToSection(sectionId: string) {
-  document
-    .getElementById(sectionId)
-    ?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-}
 
 export function ContactFooter() {
   const scrollToHero = () => {
@@ -28,378 +18,275 @@ export function ContactFooter() {
   };
 
   return (
-    <footer className="relative mt-10">
-      {/* =========================
-          BACK TO TOP
-      ========================== */}
-
-      <motion.button
-  type="button"
-  onClick={scrollToHero}
-  whileHover={{
-    scale: 1.08,
-  }}
-  whileTap={{
-    scale: 0.94,
-  }}
-  transition={{
-    duration: 0.3,
-  }}
-  aria-label="Back to top"
-  title="Back to top"
-  className="
-    group
-    absolute
-    bottom-[45px]
-    right-[15px]
-    z-20
-
-    flex
-    h-[52px]
-    w-[52px]
-    cursor-pointer
-    items-center
-    justify-center
-
-    rounded-full
-    border
-    border-cyan-400/35
-
-    bg-slate-950
+    <footer
+       className="
+    relative
+    mt-10
+  bg-[#0B0B0B]
     text-white
-
-    shadow-[0_8px_28px_rgba(2,6,23,0.45)]
-
-    transition-all
-    duration-300
-
-    hover:border-cyan-400/70
-    hover:bg-slate-900
-    hover:shadow-[0_10px_35px_rgba(34,211,238,0.16)]
   "
->
-  <ArrowUp
-    size={24}
-    strokeWidth={2.5}
-    className="
-      transition-transform
-      duration-300
-      group-hover:-translate-y-0.5
-    "
-    aria-hidden="true"
-  />
-</motion.button>
-
-      {/* =========================
-          TOP DIVIDER
-      ========================== */}
-
+    >
+      {/* Top divider */}
       <div
         className="
           h-px
           w-full
+
           bg-gradient-to-r
-          from-cyan-400/70
-          via-blue-500/40
-          to-purple-500/70
+          from-cyan-400/50
+          via-blue-500/25
+          to-purple-500/45
         "
         aria-hidden="true"
       />
 
-      {/* =========================
-          MAIN FOOTER CONTENT
-      ========================== */}
+      {/* ==================================
+          MAIN FOOTER AREA
+      =================================== */}
 
       <div
         className="
           mx-auto
-          grid
           w-full
-          max-w-[1500px]
-          gap-10
+          max-w-[1600px]
+
           px-6
           py-16
 
-          md:grid-cols-2
-          md:px-12
+          md:px-10
 
-          xl:grid-cols-[1.25fr_0.65fr_0.75fr_1.1fr]
-          xl:gap-12
-          xl:px-16
+          lg:px-16
+          lg:py-20
 
-          2xl:gap-16
-          2xl:px-20
+          2xl:px-24
         "
       >
-    
-{/* =========================
-    BRAND + PROFESSIONAL INFO
-========================== */}
+        <div
+          className="
+            grid
+            items-start
+            gap-14
 
-<div>
-  {/* Logo */}
-  <motion.button
-    type="button"
-    onClick={() =>
-      scrollToSection("home")
-    }
-    whileHover={{
-      scale: 1.05,
-    }}
-    whileTap={{
-      scale: 0.97,
-    }}
-    transition={{
-      duration: 0.22,
-    }}
-    className="
-      cursor-pointer
-      font-mono
-      text-[34px]
-      font-black
-      tracking-[-0.05em]
-      text-cyan-500
+            lg:grid-cols-[1.25fr_0.75fr]
 
-      dark:text-cyan-400
-    "
-    aria-label="Go to home"
-  >
-    &lt;Dev_X/&gt;
-  </motion.button>
+            xl:gap-20
+          "
+        >
+          {/* LEFT */}
+          <div>
+            <FooterStatement />
+          </div>
 
-  {/* Name */}
-  <h3
-    className="
-      mt-2
-      text-xl
-      font-bold
-      tracking-tight
-      text-slate-950
-
-      dark:text-white
-    "
-  >
-    Sasanka Ranawaka
-  </h3>
-
-  {/* Professional description */}
-  <p
-    className="
-      mt-1
-      max-w-[520px]
-      text-sm
-      leading-7
-      text-slate-600
-
-      dark:text-slate-400
-    "
-  >
-    Intern DevOps Engineer
-    <span className="mx-2 text-cyan-500/70">
-      |
-    </span>
-
-    Cloud &amp; DevOps Enthusiast
-    <span className="mx-2 text-cyan-500/70">
-      |
-    </span>
-
-    LinkedIn Optimization &amp; ATS-Friendly CV Specialist
-    <span className="mx-2 text-cyan-500/70">
-      |
-    </span>
-
-    Technical Writer &amp; Blogger
-    <span className="mx-2 text-cyan-500/70">
-      |
-    </span>
-
-    BICT Hons (UG)
-  </p>
-
-  
-</div>
-
-
-
-        {/* =========================
-            NAVIGATION
-        ========================== */}
-
-        <div>
-          <h3
+          {/* RIGHT - NEWSLETTER */}
+          <div
             className="
-              text-lg
-              font-bold
-              text-slate-950
+              w-full
+              max-w-[470px]
 
-              dark:text-white
+              lg:ml-auto
             "
           >
-            Navigation
-          </h3>
-
-          <nav
-            className="
-              mt-5
-              flex
-              flex-col
-              items-start
-              gap-4
-            "
-            aria-label="Footer navigation"
-          >
-            {footerNavigationLinks.map(
-              (link) => (
-                <button
-                  key={link.sectionId}
-                  type="button"
-                  onClick={() =>
-                    scrollToSection(
-                      link.sectionId,
-                    )
-                  }
-                  className="
-                    cursor-pointer
-                    text-left
-                    text-slate-600
-                    transition-colors
-                    duration-300
-
-                    hover:text-blue-600
-
-                    dark:text-slate-400
-                    dark:hover:text-cyan-300
-                  "
-                >
-                  {link.label}
-                </button>
-              ),
-            )}
-          </nav>
+            <NewsletterSubscribe />
+          </div>
         </div>
 
-        {/* =========================
-            RESOURCES
-        ========================== */}
+       
 
-        <div>
-          <h3
-            className="
-              space-grotesk-bold
-              text-lg
-              font-bold
-              text-slate-950
+        {/* Divider */}
+        <div
+          className="
+            mt-10
+            h-px
+            w-full
 
-              dark:text-white
-            "
-          >
-            Resources
-          </h3>
+            bg-slate-700/70
+          "
+          aria-hidden="true"
+        />
 
-          <nav
-            className="
-              mt-5
-              flex
-              flex-col
-              items-start
-              gap-4
-            "
-            aria-label="Footer resources"
-          >
-            {footerResourceLinks.map(
-              (link) => (
-                <button
-                  key={link.sectionId}
-                  type="button"
-                  onClick={() =>
-                    scrollToSection(
-                      link.sectionId,
-                    )
-                  }
-                  className="
-                    cursor-pointer
-                    text-left
-                    text-slate-600
-                    transition-colors
-                    duration-300
+        {/* ==================================
+            COPYRIGHT
+        =================================== */}
 
-                    hover:text-blue-600
+        <div
 
-                    dark:text-slate-400
-                    dark:hover:text-cyan-300
-                  "
-                >
-                  {link.label}
-                </button>
-              ),
-            )}
-          </nav>
-        </div>
-
-        {/* =========================
-            NEWSLETTER
-        ========================== */}
-
-        <div className="w-full min-w-0">
-          <NewsletterSubscribe />
-        </div>
-      </div>
-
-     {/* Bottom divider line */}
-<div
   className="
-    mx-auto
-    h-px
-    w-[calc(100%-3rem)]
-    max-w-[1350px]
-
-    bg-gradient-to-r
-    from-cyan-400/70
-    via-blue-500/35
-    to-purple-500/70
-
-    md:w-[calc(100%-5rem)]
-    lg:w-[calc(100%-8rem)]
-  "
-  aria-hidden="true"
-/>
-
-{/* Copyright */}
-<div
-  className="
-    mx-auto
     flex
-    w-[calc(100%-3rem)]
-    max-w-[1350px]
     flex-col
-    gap-4
-    py-6
+    gap-2
+    pt-2
+    pb-0
 
     text-sm
-    text-slate-600
+    text-slate-500
 
-    dark:text-slate-400
-
-    md:w-[calc(100%-5rem)]
     md:flex-row
     md:items-center
     md:justify-between
-
-    lg:w-[calc(100%-8rem)]
   "
 >
-  <p>
-    © 2026 Sasanka Ranawaka. All rights reserved.
-  </p>
+        
+          <p>
+            © 2026 Sasanka Ranawaka.
+            All rights reserved.
+          </p>
 
-  <p className="text-right">
-    Designed &amp; Built by{" "}
-    <span className="text-cyan-500 dark:text-cyan-400">
-      Sasanka Ranawaka
+          <p>
+            Designed &amp; Built by{" "}
+            <span className="text-cyan-400">
+              Sasanka Ranawaka
+            </span>
+          </p>
+        </div>
+      </div>
+{/* LARGE FOOTER NAME */}
+<div
+  className="
+    relative
+    mt-0
+    h-[210px]
+    w-full
+    overflow-hidden
+
+    sm:h-[200px]
+    md:h-[205px]
+    lg:h-[205px]
+    xl:h-[250px]
+  "
+  aria-hidden="true"
+>
+  <div
+    className="
+      absolute
+      left-1/2
+      top-0
+      w-max
+      -translate-x-1/2
+
+      select-none
+      whitespace-nowrap
+
+      font-['Space_Grotesk']
+      text-[24.2vw]
+      
+      leading-[0.82]
+      tracking-[-0.055em]
+    "
+  >
+    {/* Sharp main text */}
+    <span
+      className="
+        relative
+        z-10
+        text-[#F5F5F2]
+      "
+    >
+      Sasanka 
     </span>
-  </p>
+
+    {/* Lower vertical blurred/smeared part */}
+    <span
+      className="
+        pointer-events-none
+        absolute
+        inset-0
+        z-0
+
+        origin-bottom
+        translate-y-[12%]
+        scale-y-[1.18]
+
+        text-[#F5F5F2]
+        opacity-75
+
+        blur-[8px]
+
+        [mask-image:linear-gradient(to_bottom,transparent_0%,transparent_58%,rgba(0,0,0,0.3)_68%,black_82%,black_100%)]
+        [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,transparent_58%,rgba(0,0,0,0.3)_68%,black_82%,black_100%)]
+      "
+    >
+      Sasanka 
+    </span>
+
+    {/* Extra soft downward streak */}
+    <span
+      className="
+        pointer-events-none
+        absolute
+        inset-0
+
+        origin-bottom
+        translate-y-[18%]
+        scale-y-[1.28]
+
+        text-white
+        opacity-30
+
+        blur-[16px]
+
+        [mask-image:linear-gradient(to_bottom,transparent_0%,transparent_66%,black_88%,black_100%)]
+        [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,transparent_66%,black_88%,black_100%)]
+      "
+    >
+      Sasanka 
+    </span>
+  </div>
 </div>
+
+      {/* ==================================
+          BACK TO TOP
+      =================================== */}
+
+      <motion.button
+        type="button"
+        onClick={scrollToHero}
+        whileHover={{
+          scale: 1.08,
+          y: -3,
+        }}
+        whileTap={{
+          scale: 0.94,
+        }}
+        transition={{
+          duration: 0.2,
+        }}
+        aria-label="Back to top"
+        title="Back to top"
+        className="
+          absolute
+
+          bottom-[70px]
+          right-5
+          z-20
+
+          grid
+          h-[56px]
+          w-[56px]
+          place-items-center
+
+          rounded-full
+
+          border
+          border-cyan-400/30
+
+          bg-[#050B16]
+
+          text-white
+
+          shadow-[0_10px_30px_rgba(2,6,23,0.50)]
+
+          transition-colors
+          duration-300
+
+          hover:border-cyan-400/70
+          hover:bg-[#0B1728]
+        "
+      >
+        <ArrowUp
+          size={24}
+          strokeWidth={2.4}
+        />
+      </motion.button>
     </footer>
   );
 }

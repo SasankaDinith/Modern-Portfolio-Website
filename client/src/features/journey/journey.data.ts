@@ -20,9 +20,10 @@ export const workExperience: TimelineSection = {
       organization: "Zulacart PVT Ltd",
 
       description: [
-        "Deploying scalable cloud-native applications on AWS and containers.",
-        "Automating infrastructure using Terraform and infrastructure as code.",
-        "Monitoring systems and optimizing reliability, performance, and cost.",
+        " Supported the migration of production AWS resources from a Middle East AWS Region to an AsiaPacific ap-southeast Region during a planned server-downtime window.",
+        "Migrated cloud resources and services, including Amazon EC2 instances, Amazon RDS databases, Amazon S3 storage, Amazon VPC networking components and AWS Elastic Load Balancing resources.",
+        "Administered Linux-based environments by monitoring system resources, managing permissions, reviewing logs and resolving deployment or connectivity issues.",
+        "Deployed and supported the company’s production e-commerce website within a locally hosted/on-premises environment.",
       ],
     },
 
@@ -71,6 +72,22 @@ export const education: TimelineSection = {
       ],
     },
 
+
+    {
+      period: "2026",
+      title: "IDET Certified DevOps & TechOps (Infrastructure Engineering) Program",
+      organization: "IDET - Institute of Digital Engineering Technology",
+
+      tags: [
+        "RHEL System Administration",
+        "Ansible Automation",
+        "Infrastructure as Code",
+        "Docker & Kubernetes",
+        "Prometheus & Grafana",
+
+      ],
+    },
+
     {
       period: "2022",
       title: "Diploma in English",
@@ -102,6 +119,12 @@ export const education: TimelineSection = {
 
 export const certifications: Certification[] = [
 
+   {
+    id: 1,
+    title: "IDET Certified: OPS(DevOps/TechOps) Practitioner",
+    issuer: "IDET - Institute of Digital Engineering Technology",
+    verificationUrl: "https://credentials.certdirectory.io/verify/CRD-UJ4JBQGN",
+  },
 
    {
     id: 1,
