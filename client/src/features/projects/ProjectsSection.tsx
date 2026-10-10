@@ -159,7 +159,8 @@ export function ProjectsSection() {
           )}
 
           <a
-            href="/projects"
+            href="https://github.com/SasankaDinith?tab=repositories"
+             target="_blank"
             className="
               inline-flex
               min-h-[52px]

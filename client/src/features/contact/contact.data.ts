@@ -22,7 +22,7 @@ export const socialLinks = [
   },
   {
     label: "GitHub",
-    href: "https://github.com/your-github-username",
+    href: "https://github.com/SasankaDinith",
     icon: FaGithub,
   },
   {
