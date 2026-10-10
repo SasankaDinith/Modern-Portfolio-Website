@@ -72,6 +72,8 @@ export const projects: Project[] = [
     liveUrl: "https://your-portfolio-domain.com",
     featured: true,
   },
+
+  /*
   {
     id: 5,
     slug: "ai-model-deployment-platform",
@@ -137,5 +139,10 @@ export const projects: Project[] = [
     liveUrl: "https://your-portfolio-domain.com",
     featured: false,
   },
- 
+
+  
+ */
+
+
+  
 ];
