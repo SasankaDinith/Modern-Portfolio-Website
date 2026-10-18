@@ -17,7 +17,7 @@ export function HeroProfile() {
         mx-auto
         aspect-square
         w-full
-        max-w-[380px]
+        max-w-[390px]
         cursor-pointer
 
         md:max-w-[420px]

@@ -50,7 +50,7 @@ export function SocialRail() {
         delay: 0.6,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="fixed bottom-7 left-5 z-40 hidden flex-col items-center gap-3 xl:flex"
+      className="fixed bottom-7 left-7 z-40 hidden flex-col items-center gap-3 xl:flex"
       aria-label="Social media links"
     >
      

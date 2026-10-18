@@ -141,7 +141,7 @@ export function HeroSection() {
           mx-auto
           grid
           w-full
-          max-w-[1480px]
+          max-w-[1700px]
           items-center
           gap-14
           px-6
@@ -151,11 +151,11 @@ export function HeroSection() {
           md:px-10
 
           lg:grid-cols-[minmax(0,1.05fr)_minmax(400px,0.95fr)]
-          lg:px-16
+          lg:px-10
 
           xl:gap-12
 
-          2xl:px-24
+          2xl:px-16
         "
       >
         {/* Left side */}
