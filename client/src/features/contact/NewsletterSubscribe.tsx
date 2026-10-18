@@ -170,10 +170,10 @@ export function NewsletterSubscribe() {
 
             rounded-xl
 
-            bg-gradient-to-r
-            from-blue-600
-            via-blue-500
-            to-cyan-500
+       bg-gradient-to-r
+      from-blue-600
+      to-indigo-600
+
 
             px-5
 

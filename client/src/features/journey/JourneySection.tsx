@@ -99,8 +99,7 @@ export function JourneySection() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-slate-700 dark:text-slate-300 sm:text-lg">
-            A snapshot of my professional experience, research work,
-            and educational background.
+            A snapshot of my journey across DevOps, cloud engineering, systems, technical writing, professional experience, and academic development.
           </p>
         </motion.div>
 

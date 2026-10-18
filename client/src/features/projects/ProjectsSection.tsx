@@ -88,9 +88,7 @@ export function ProjectsSection() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-4xl text-base leading-8 text-slate-700 dark:text-slate-300 sm:text-lg">
-            A collection of projects showcasing AI and machine-learning
-            research, DevOps automation, cloud infrastructure, backend
-            development, and full-stack applications.
+           A selection of projects across cloud infrastructure, DevOps automation, system engineering, AI and machine learning, backend development, and full-stack applications.
           </p>
         </motion.div>
 
@@ -170,10 +168,11 @@ export function ProjectsSection() {
               rounded-xl
               border
               border-blue-500/20
-              bg-gradient-to-r
-              from-blue-600
-              via-indigo-500
-              to-purple-600
+             bg-gradient-to-r
+      from-blue-600
+      to-indigo-600
+
+         
               px-7
               py-3
               text-sm
@@ -185,15 +184,16 @@ export function ProjectsSection() {
 
               hover:shadow-[0_10px_30px_rgba(59,130,246,0.28)]
 
-              dark:border-blue-400/20
-              dark:from-blue-600
-              dark:via-indigo-500
-              dark:to-purple-600
+              hover:-translate-y-0.5
+              dark:border-cyan-400/20
+              dark:bg-gradient-to-r
+
+             
               dark:text-white
             "
           >
             View All Projects
-            <ArrowRight size={18} />
+            <ArrowRight size={19} />
           </a>
         </div>
       </div>

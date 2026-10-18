@@ -85,9 +85,7 @@ export function SkillsSection() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-4xl text-base leading-8 text-slate-700 dark:text-slate-300 sm:text-lg">
-            Building reliable cloud infrastructure, automating delivery
-            pipelines, and solving engineering challenges with modern DevOps,
-            cloud-native, and AI-assisted tools.
+            Applying cloud-native, DevOps, systems, SRE, and AI-assisted tools to automate infrastructure, improve reliability, and solve real-world engineering challenges.
           </p>
         </motion.div>
 

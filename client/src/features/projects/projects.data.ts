@@ -1,6 +1,21 @@
 import type { Project } from "./projects.types";
 
 export const projects: Project[] = [
+
+
+   {
+    id: 1,
+    slug: "Personal Portfolio Website",
+    title: "Personal Portfolio Website",
+    description:
+      "A modern cloud and DevOps portfolio with responsive UI, serverless contact handling, automated Vercel deployment, and custom domain integration.",
+    image: "/Projects/Jenkins Project.png",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Vercel", "Node.js", "Nodemailer", "GitHub","DNS","Gmail SMTP"],
+    category: "Cloud, DevOps & Full-Stack Development",
+    githubUrl: "https://github.com/SasankaDinith/Modern-Portfolio-Website",
+    liveUrl: "https://sasankaranawaka.me",
+    featured: true,
+  },
   {
     id: 1,
     slug: "Automated CI/CD Pipeline with Jenkins, SonarQube, Docker and AWS",

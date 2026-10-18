@@ -15,7 +15,7 @@ export const workExperience: TimelineSection = {
 
   entries: [
     {
-      period: "Feb 2026 – Present",
+      period: "Feb 2026 – Aug 2026",
       title: "Intern DevOps & Cloud Engineer",
       organization: "Zulacart PVT Ltd",
 
@@ -118,6 +118,20 @@ export const education: TimelineSection = {
 };
 
 export const certifications: Certification[] = [
+
+   {
+    id: 1,
+    title: "AWS SimuLearn - Cloud Practitioner",
+    issuer: "Amazon Web Services Training and Certification",
+    verificationUrl: "https://www.credly.com/badges/bb3705be-c08b-4fe3-a366-cc71476cccc8/public_url",
+  },
+
+    {
+    id: 1,
+    title: "AWS SimuLearn - AI Practitioner",
+    issuer: "Amazon Web Services Training and Certification",
+    verificationUrl: "https://www.credly.com/badges/ca10ce27-4f6f-4134-bf99-ec10d99604a2/public_url",
+  }, 
 
    {
     id: 1,

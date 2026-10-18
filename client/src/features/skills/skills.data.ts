@@ -142,33 +142,9 @@ export const skills: Skill[] = [
 ];
 
 export const skillCategories: SkillCategory[] = [
+  
   {
     id: 1,
-    title: "Programming Languages",
-    icon: FaCode,
-    technologies: [
-      "Java",
-      "Python",
-      "JavaScript",
-      "C++",
-      "PHP",
-      "Bash",
-    ],
-  },
-  {
-    id: 2,
-    title: "Frameworks & Platforms",
-    icon: SiReact,
-    technologies: [
-      "React",
-      "Node.js",
-      "Express",
-      ".NET",
-    
-    ],
-  },
-  {
-    id: 3,
     title: "DevOps & Cloud",
     icon: FaCloud,
     technologies: [
@@ -181,8 +157,19 @@ export const skillCategories: SkillCategory[] = [
       "Ansible",
     ],
   },
+   {
+    id: 2,
+    title: "Monitoring & Observability",
+    icon: SiPrometheus,
+    technologies: [
+      "Prometheus",
+      "Grafana",
+      "Nginx",
+      "ELK Stack",
+    ],
+  },
   {
-    id: 4,
+    id: 3,
     title: "CI/CD & Automation",
     icon: SiGithubactions,
     technologies: [
@@ -193,7 +180,35 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    id: 4,
+    title: "Programming Languages",
+    icon: FaCode,
+    technologies: [
+      "Java",
+      "Python",
+      "JavaScript",
+      "C++",
+      "PHP",
+      "Bash",
+    ],
+  },
+  
+  {
     id: 5,
+    title: "Frameworks & Platforms",
+    icon: SiReact,
+    technologies: [
+      "React",
+      "Node.js",
+      "Express",
+      ".NET",
+    
+    ],
+  },
+  
+  
+  {
+    id: 6,
     title: "Databases & Storage",
     icon: FaDatabase,
     technologies: [
@@ -203,17 +218,9 @@ export const skillCategories: SkillCategory[] = [
     
     ],
   },
-  {
-    id: 6,
-    title: "Monitoring & Observability",
-    icon: SiPrometheus,
-    technologies: [
-      "Prometheus",
-      "Grafana",
-      "Nginx",
-      "ELK Stack",
-    ],
-  },
 ];
 
 
+
+
+ 

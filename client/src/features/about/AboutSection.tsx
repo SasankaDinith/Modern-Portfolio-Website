@@ -113,9 +113,7 @@ export function AboutSection() {
               sm:text-lg
             "
           >
-            I build reliable cloud infrastructure, automate delivery pipelines,
-            and optimize systems for performance and scale. I explore AI-driven
-            engineering to solve complex problems and ship impactful solutions.
+            Focused on building reliable cloud infrastructure, automating delivery pipelines, improving system reliability, and applying modern DevOps, SRE, and AI-assisted engineering practices.
           </p>
         </motion.div>
 

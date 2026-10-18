@@ -212,10 +212,9 @@ export function HeroSection() {
 
     mt-4
 
-    bg-gradient-to-r
-    from-[#2F6FF0]
-    via-[#2389EE]
-    to-[#10B6E8]
+     bg-gradient-to-r
+      from-blue-600
+      to-indigo-500
 
     bg-clip-text
     text-transparent
@@ -280,45 +279,58 @@ export function HeroSection() {
             }
             className="mt-10 flex flex-col gap-4 sm:flex-row"
           >
-            {/* View Projects */}
-            <motion.div
-              whileHover={
-                reduceMotion
-                  ? undefined
-                  : {
-                      y: -3,
-                      scale: 1.025,
-                    }
-              }
-              whileTap={{
-                scale: 0.97,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-              }}
-            >
-              <Button href="#projects">
-                View Projects
+{/* View Projects */}
+<motion.div
+  whileHover={
+    reduceMotion
+      ? undefined
+      : {
+          y: -2,
+        }
+  }
+  whileTap={{
+    scale: 0.97,
+  }}
+  transition={{
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  }}
+>
+  <a
+    href="#projects"
+    className="
+      inline-flex
+      min-h-12
+      items-center
+      gap-2
+      whitespace-nowrap
+      rounded-xl
+bg-gradient-to-r
+      from-blue-600
+      to-indigo-600
 
-                <motion.span
-                  className="inline-flex"
-                  whileHover={
-                    reduceMotion
-                      ? undefined
-                      : {
-                          x: 4,
-                        }
-                  }
-                >
-                  <ArrowRight
-                    size={20}
-                    aria-hidden="true"
-                  />
-                </motion.span>
-              </Button>
-            </motion.div>
+      px-5
+
+      text-sm
+      font-semibold
+      text-white
+  shadow-[0_0_25px_rgba(37,99,235,0.25)]
+
+      transition
+      duration-300
+
+      hover:-translate-y-0.5
+    "
+  >
+    View Projects
+
+    <ArrowRight
+      size={18}
+      aria-hidden="true"
+    />
+  </a>
+</motion.div>
 
             {/* Contact */}
             <motion.div
@@ -341,6 +353,7 @@ export function HeroSection() {
               <Button
                 href="#contact"
                 variant="secondary"
+                
               >
                 Contact Me
 

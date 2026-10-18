@@ -93,9 +93,7 @@ export function BlogsSection() {
 
           {/* Description */}
           <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-700 dark:text-slate-300 sm:text-lg">
-            Thoughts on Cloud, DevOps, infrastructure, artificial
-            intelligence, cybersecurity, technical writing, and software
-            engineering research.
+           Sharing practical insights on Cloud, DevOps, SRE, system engineering, infrastructure, AI, cybersecurity, and modern software engineering.
           </p>
         </motion.div>
 
@@ -163,10 +161,11 @@ export function BlogsSection() {
               rounded-xl
               border
               border-blue-500/20
-              bg-gradient-to-r
-              from-blue-600
-              via-indigo-500
-              to-purple-600
+             bg-gradient-to-r
+      from-blue-600
+      to-indigo-600
+
+            
               px-8
               py-3.5
               font-semibold

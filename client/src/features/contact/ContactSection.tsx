@@ -89,9 +89,7 @@ export function ContactSection() {
 
           {/* Description */}
           <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-700 dark:text-slate-300 sm:text-lg">
-            Interested in Cloud, DevOps, software engineering,
-            artificial intelligence, technical writing, or research
-            collaboration? Let’s connect and build impactful solutions.
+            Interested in Cloud, DevOps, SRE, infrastructure, systems, AI, or technical collaboration? Let’s connect and build reliable, scalable, and impactful solutions.
           </p>
         </motion.div>
 

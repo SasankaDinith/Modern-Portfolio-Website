@@ -69,15 +69,14 @@ export function TimelineCard({
             justify-center
             rounded-2xl
             border
-            border-blue-500/50
-            bg-blue-50
-            text-blue-600
+        backdrop-blur-xl
+ dark:bg-blue-950/60
 
             dark:border-cyan-400/50
             dark:bg-gradient-to-br
-            dark:from-blue-900/70
-            dark:to-purple-900/70
-            dark:text-white
+        
+           
+         
           "
         >
           <Icon size={25} />
