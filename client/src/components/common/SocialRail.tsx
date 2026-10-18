@@ -50,7 +50,7 @@ export function SocialRail() {
         delay: 0.6,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="fixed bottom-7 left-7 z-40 hidden flex-col items-center gap-3 xl:flex"
+      className="fixed bottom-7 left-5 z-40 hidden flex-col items-center gap-3 xl:flex"
       aria-label="Social media links"
     >
      
@@ -62,7 +62,7 @@ export function SocialRail() {
 
       {/* Lower decorative line */}
       <span
-        className="h-10 w-px bg-gradient-to-b from-cyan-400 to-transparent"
+        className="h-10 w-px bg-cyan-400 from-cyan-400 to-transparent"
         aria-hidden="true"
       />
 
@@ -91,7 +91,7 @@ export function SocialRail() {
             stiffness: 220,
             damping: 18,
           }}
-          className="grid h-12 w-12 cursor-pointer place-items-center rounded-xl border border-cyan-400/45 bg-slate-950/80 text-slate-100 dark:text-slate-300 shadow-[0_0_20px_rgba(34,211,238,0.08)] backdrop-blur-xl transition-colors duration-300 hover:border-cyan-300 hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+          className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-cyan-400/45 bg-slate-950/80 text-slate-100 dark:text-slate-300 shadow-[0_0_20px_rgba(34,211,238,0.08)] backdrop-blur-xl transition-colors duration-300 hover:border-cyan-300 hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
         >
           <Icon size={22} aria-hidden="true" />
         </motion.a>
@@ -101,7 +101,7 @@ export function SocialRail() {
       
       {/* Lower decorative line */}
       <span
-        className="h-10 w-px bg-gradient-to-b from-cyan-400 to-transparent"
+        className="h-10 w-px bg-cyan-400 from-cyan-400 to-transparent"
         aria-hidden="true"
       />
     </motion.aside>

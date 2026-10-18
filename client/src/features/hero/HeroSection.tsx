@@ -141,7 +141,7 @@ export function HeroSection() {
           mx-auto
           grid
           w-full
-          max-w-[1500px]
+          max-w-[1480px]
           items-center
           gap-14
           px-6

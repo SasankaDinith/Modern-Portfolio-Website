@@ -9,7 +9,7 @@ export const projects: Project[] = [
     title: "Personal Portfolio Website",
     description:
       "A modern cloud and DevOps portfolio with responsive UI, serverless contact handling, automated Vercel deployment, and custom domain integration.",
-    image: "/Projects/Jenkins Project.png",
+    image: "/Projects/portfolio.png",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Vercel", "Node.js", "Nodemailer", "GitHub","DNS","Gmail SMTP"],
     category: "Cloud, DevOps & Full-Stack Development",
     githubUrl: "https://github.com/SasankaDinith/Modern-Portfolio-Website",
