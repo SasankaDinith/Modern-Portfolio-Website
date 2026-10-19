@@ -47,7 +47,7 @@ export function FooterStatement() {
           flex
           flex-wrap
           items-baseline
-          gap-x-3
+          gap-x-4
 
           text-[42px]
           font-medium

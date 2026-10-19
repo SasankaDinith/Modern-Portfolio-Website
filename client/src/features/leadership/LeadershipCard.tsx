@@ -18,7 +18,7 @@ export function LeadershipCard({
     useReducedMotion();
 
   return (
-    <motion.article
+<motion.article
   initial={
     reduceMotion
       ? false
@@ -35,26 +35,14 @@ export function LeadershipCard({
           y: 0,
         }
   }
-
-  whileHover={
-    reduceMotion
-      ? undefined
-      : {
-          y: -6,
-          scale: 1.01,
-        }
-  }
-
   viewport={{
     once: true,
     amount: 0.25,
   }}
-
   transition={{
-    duration: 0.75,
+    duration: 0.6,
     ease: [0.22, 1, 0.36, 1],
   }}
-
   className="
     relative
     flex
@@ -64,25 +52,26 @@ export function LeadershipCard({
 
     rounded-[26px]
     border
-    border-slate-300
 
+    border-slate-300
     bg-white
+
     p-7
 
-
+    shadow-[0_10px_30px_rgba(15,23,42,0.04)]
 
     transition-colors
     duration-300
 
-    hover:border-blue-400/60
-    hover:shadow-[0_16px_40px_rgba(37,99,235,0.10)]
+    hover:border-blue-400/50
+    hover:bg-blue-50/40
 
     dark:border-slate-800
     dark:bg-[#02040b]
     dark:shadow-none
 
-
-
+    dark:hover:border-cyan-400/35
+    dark:hover:bg-[#07111f]
   "
 >
       {/* Subtle background effect */}

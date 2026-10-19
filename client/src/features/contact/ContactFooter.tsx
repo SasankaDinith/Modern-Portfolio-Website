@@ -18,14 +18,16 @@ export function ContactFooter() {
   };
 
   return (
-    <footer
-       className="
+   <footer
+  id="portfolio-footer"
+  className="
     relative
     mt-10
-  bg-[#0B0B0B]
+    overflow-hidden
+    bg-[#040404]
     text-white
   "
-    >
+>
       {/* Top divider */}
       <div
         className="
@@ -55,8 +57,9 @@ export function ContactFooter() {
 
           md:px-10
 
-          lg:px-16
-          lg:py-20
+          lg:px-18
+          lg:py-22
+          lg:pt-14
 
           2xl:px-24
         "
@@ -95,9 +98,10 @@ export function ContactFooter() {
         {/* Divider */}
         <div
           className="
-            mt-10
+            mt-14
             h-px
             w-full
+          
 
             bg-slate-700/70
           "
@@ -150,8 +154,13 @@ export function ContactFooter() {
 
     sm:h-[200px]
     md:h-[205px]
-    lg:h-[205px]
+    lg:h-[200px]
     xl:h-[250px]
+
+     sm:-mt-14
+    md:-mt-16
+    lg:-mt-26
+    xl:-mt-6
   "
   aria-hidden="true"
 >
