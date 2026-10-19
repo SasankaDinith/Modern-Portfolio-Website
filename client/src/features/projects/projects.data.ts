@@ -26,7 +26,7 @@ export const projects: Project[] = [
     technologies: ["Jenkins", "AWS", "Docker", "Linux", "SonarQube", "GitHub Webhooks"],
     category: "DevOps",
     githubUrl: "https://github.com/SasankaDinith/Automated-Jenkins-CI-CD-Pipeline-with-Sonarqube-Docker-Github-Webhooks-and-AWS",
-    liveUrl: "https://your-portfolio-domain.com",
+    liveUrl: "#",
     featured: true,
   },
   {
@@ -45,7 +45,7 @@ export const projects: Project[] = [
     ],
     category: "Cloud",
     githubUrl: "https://github.com/SasankaDinith/Site-to-Site-VPN-Connectivity-between-AWS-and-Microsoft-Azure",
-    liveUrl: "https://your-portfolio-domain.com",
+    liveUrl: "#",
     featured: true,
   },
   {
@@ -66,7 +66,7 @@ export const projects: Project[] = [
     ],
     category: "University Group Project",
     githubUrl: "https://github.com/SasankaDinith/MOODMIRROR-ICTProject",
-    liveUrl: "https://your-portfolio-domain.com",
+    liveUrl: "#",
     featured: true,
   },
   {
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     ],
     category: "University Group Project",
     githubUrl: "https://github.com/SasankaDinith/Automated-car-parking-system",
-    liveUrl: "https://your-portfolio-domain.com",
+
     featured: true,
   },
 
