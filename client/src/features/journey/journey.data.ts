@@ -268,7 +268,7 @@ export const honorsRecognitions: HonorRecognition[] = [
     issuer: "Favikon",
     description:
       "Ranked #4 among Cloud & DevOps Engineering creators in Sri Lanka by Favikon's Top 200 Creators ranking. This recognition reflects my contributions to the professional community through sharing knowledge, insights, and content related to Cloud Computing, DevOps practices, Networking, and emerging technologies on LinkedIn.",
-    image: "/Honours/Favikon.png",
+    image: "/Honours/Favikon.webp",
     link: "https://www.favikon.com/",
   },
 ];

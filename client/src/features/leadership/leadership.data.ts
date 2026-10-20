@@ -15,7 +15,7 @@ export const leadershipExperiences: LeadershipExperience[] =
         "Publishing technical articles and educational content focused on Cloud Computing, DevOps, Linux, CI/CD, containerization, and modern infrastructure practices.",
 
       image:
-        "/leadership/medium_logo.jpg",
+        "/leadership/medium_logo.webp",
 
       link:
         "https://medium.com/@sasankad101",
@@ -34,7 +34,7 @@ export const leadershipExperiences: LeadershipExperience[] =
         "Contributing to university club activities, student engagement, event coordination, and collaborative initiatives.",
 
       image:
-        "/leadership/IEEE_USJ.png",
+        "/leadership/IEEE_USJ.webp",
     },
 
     {
@@ -50,7 +50,7 @@ export const leadershipExperiences: LeadershipExperience[] =
         "Participating in the society's activities, supporting skill development programs, and assisting in organizing events for students.",
 
       image:
-        "/leadership/CSDS.png",
+        "/leadership/CSDS.webp",
     },
       {
       id: 4,
@@ -65,6 +65,6 @@ export const leadershipExperiences: LeadershipExperience[] =
         "Representing the university as an ambassador for CloudSpace v1.0, promoting the event, and engaging with participants to enhance their experience.",
 
       image:
-        "/leadership/IEEE_SLTC.png",
+        "/leadership/IEEE_SLTC.webp",
     },
   ];

@@ -9,7 +9,7 @@ export const projects: Project[] = [
     title: "Personal Portfolio Website",
     description:
       "A modern cloud and DevOps portfolio with responsive UI, serverless contact handling, automated Vercel deployment, and custom domain integration.",
-    image: "/Projects/portfolio.png",
+    image: "/Projects/portfolio.webp",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Vercel", "Node.js", "Nodemailer", "GitHub","DNS","Gmail SMTP"],
     category: "Cloud, DevOps & Full-Stack Development",
     githubUrl: "https://github.com/SasankaDinith/Modern-Portfolio-Website",
@@ -22,7 +22,7 @@ export const projects: Project[] = [
     title: "Automated CI/CD Pipeline with Jenkins, SonarQube, Docker and AWS",
     description:
       "A fully automated CI/CD pipeline that integrates Jenkins, SonarQube, Docker, and AWS for seamless application deployment.",
-    image: "/Projects/Jenkins Project.png",
+    image: "/Projects/Jenkins Project.webp",
     technologies: ["Jenkins", "AWS", "Docker", "Linux", "SonarQube", "GitHub Webhooks"],
     category: "DevOps",
     githubUrl: "https://github.com/SasankaDinith/Automated-Jenkins-CI-CD-Pipeline-with-Sonarqube-Docker-Github-Webhooks-and-AWS",
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     title: "Cross-Cloud Site-to-Site VPN Between AWS and Microsoft Azure",
     description:
       "A secure and reliable site-to-site VPN solution connecting AWS and Microsoft Azure environments.",
-    image: "/Projects/AWS & Azure S2S.png",
+    image: "/Projects/AWS & Azure S2S.webp",
     technologies: [
       "AWS",
       "EC2",
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     title: "MoodMirror – A Real-Time Mental Health Companion",
     description:
       "MoodMirror is an AI-powered real-time mental health companion that detects emotions through facial expressions, speech tone, and body language and provides personalized wellness feedback.",
-    image: "/Projects/Moodmirror.png",
+    image: "/Projects/Moodmirror.webp",
     technologies: [
       "React",
       "Tailwind CSS",
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     title: "Automated Car Parking System",
     description:
       "Developed a fully automated smart car parking system that enhances efficiency and reduces the need for human intervention in parking management. This system integrates hardware components, microcontrollers, sensors, and a web-based interface to provide a seamless and intelligent parking experience.",
-    image: "/Projects/Car parking system.jpeg",
+    image: "/Projects/Car parking system.webp",
     technologies: [
       "Arduino Uno",
       "ESP32 Microcontroller",

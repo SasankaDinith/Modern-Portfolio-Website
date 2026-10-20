@@ -3,7 +3,7 @@ import {
   useReducedMotion,
 } from "motion/react";
 
-import heroProfile from "../../assets/images/me2.jpeg";
+import heroProfile from "../../assets/images/me2.webp";
 
 export function HeroProfile() {
   const reduceMotion =
