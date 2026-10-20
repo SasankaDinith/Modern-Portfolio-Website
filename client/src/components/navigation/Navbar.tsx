@@ -350,36 +350,36 @@ export function Navbar() {
   <ThemeToggle />
 
   {/* Download CV */}
-  <a
-    href="/documents/sasanka-ranawaka-cv.pdf"
-    download
-    className="
-      inline-flex
-      min-h-12
-      items-center
-      gap-2
-      whitespace-nowrap
-      rounded-xl
-      bg-gradient-to-r
-      from-blue-600
-      to-indigo-600
-      px-5
-      text-sm
-      font-semibold
-      text-white
-      shadow-[0_0_25px_rgba(37,99,235,0.25)]
-      transition
-      duration-300
-      hover:-translate-y-0.5
-    "
-  >
-    Download CV
+<a
+  href="/documents/Sasanka_CV.pdf"
+  download="Sasanka_Ranawaka_CV.pdf"
+  className="
+    inline-flex
+    min-h-12
+    items-center
+    gap-2
+    whitespace-nowrap
+    rounded-xl
+    bg-gradient-to-r
+    from-blue-600
+    to-indigo-600
+    px-5
+    text-sm
+    font-semibold
+    text-white
+    shadow-[0_0_25px_rgba(37,99,235,0.25)]
+    transition
+    duration-300
+    hover:-translate-y-0.5
+  "
+>
+  Download CV
 
-    <Download
-      size={18}
-      aria-hidden="true"
-    />
-  </a>
+  <Download
+    size={18}
+    aria-hidden="true"
+  />
+</a>
 </div>
 
           {/* Mobile menu button */}
