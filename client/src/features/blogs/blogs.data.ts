@@ -3,21 +3,21 @@ import type { BlogArticle } from "./blogs.types";
 export const blogArticles: BlogArticle[] = [
   {
     id: 1,
-    title: "Infrastructure as Code (IaC) with Terraform & Configuration Management using Ansible: A Beginner’s Practical Guide",
+    title: "AWS Well-Architected Framework Explained: 6 Pillars and a Real-World Example",
     description:
-      "This article provides a practical guide for beginners on using Terraform for Infrastructure as Code (IaC) and Ansible for configuration management, including step-by-step instructions and examples.",
-    coverImage: "/blogs/Terraform & Ansible Artilcle.webp",
-    publishedDate: "August 2026",
-    readingTime: "15 min read",
+      "In this article, I’ll share what I’ve learned about the six pillars, the AWS Well-Architected Tool, and how these principles can be applied to a practical online business architecture.",
+    coverImage: "/blogs/WAF.webp",
+    publishedDate: "October 2026",
+    readingTime: "9 min read",
     tags: [
-      "Infrastructure as Code",
-      "Terraform",
-      "Configuration Management",
-      "Ansible",
-      "DevOps",
+      "AWS Well-Architected Framework",
+      "AWS",
+      "Cloud Computing",
+      "AWS Architecture",
+      "Security Best Practices",
     ],
     articleUrl:
-      "https://medium.com/@sasankad101/infrastructure-as-code-iac-with-terraform-configuration-management-using-ansible-a-beginners-c6e81082a3af?sharedUserId=sasankad101",
+      "https://sasankad101.medium.com/aws-well-architected-framework-explained-6-pillars-and-a-real-world-example-9729bbb5fd3a?sharedUserId=sasankad101",
   },
   {
     id: 2,
