@@ -1,4 +1,10 @@
-import { useEffect, useRef } from "react";
+
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
 import {
   Activity,
   Boxes,
@@ -8,10 +14,17 @@ import {
   Server,
   BarChart2,
 } from "lucide-react";
+
+import type { LucideIcon } from "lucide-react";
+
 import {
   motion,
   useReducedMotion,
 } from "motion/react";
+
+/* =========================
+   TYPES
+========================= */
 
 type Particle = {
   x: number;
@@ -22,7 +35,7 @@ type Particle = {
 };
 
 type InfrastructureSymbol = {
-  Icon: typeof Cloud;
+  Icon: LucideIcon;
   left: string;
   top: string;
   delay: number;
@@ -31,12 +44,46 @@ type InfrastructureSymbol = {
 };
 
 /* =========================
-   PARTICLE SETTINGS
+   PERFORMANCE SETTINGS
 ========================= */
 
-const PARTICLE_SPEED = 1.8;
+const PARTICLE_SPEED = 0.65;
+
 const CONNECTION_DISTANCE = 185;
 const POINTER_RANGE = 250;
+
+const CONNECTION_DISTANCE_SQUARED =
+  CONNECTION_DISTANCE * CONNECTION_DISTANCE;
+
+const POINTER_RANGE_SQUARED =
+  POINTER_RANGE * POINTER_RANGE;
+
+function getSettings(viewportWidth: number) {
+  if (viewportWidth < 640) {
+    return {
+      particleCount: 24,
+      fps: 24,
+      maxDpr: 1.5,
+      mobile: true,
+    };
+  }
+
+  if (viewportWidth < 1024) {
+    return {
+      particleCount: 45,
+      fps: 30,
+      maxDpr: 1.75,
+      mobile: false,
+    };
+  }
+
+  return {
+    particleCount: 70,
+    fps: 40,
+    maxDpr: 2,
+    mobile: false,
+  };
+}
 
 /* =========================
    INFRASTRUCTURE SYMBOLS
@@ -91,217 +138,264 @@ const symbols: InfrastructureSymbol[] = [
     duration: 7.2,
     size: 31,
   },
-   {
+  {
     Icon: BarChart2,
-    left: "91%",
-    top: "63%",
+    left: "74%",
+    top: "48%",
     delay: 2.5,
     duration: 7.2,
     size: 31,
   },
 ];
 
+/* =========================
+   MAIN COMPONENT
+========================= */
+
 export function NetworkBackground() {
+  const containerRef =
+    useRef<HTMLDivElement | null>(null);
+
   const canvasRef =
     useRef<HTMLCanvasElement | null>(null);
 
   const reduceMotion = useReducedMotion();
 
+  const [isHeroVisible, setIsHeroVisible] =
+    useState(true);
+
   /* =========================
-     PARTICLE CANVAS
+     OPTIMIZED PARTICLE CANVAS
   ========================= */
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const container = containerRef.current;
 
-    if (!canvas) return;
+    if (!canvas || !container) return;
 
-    const context =
-      canvas.getContext("2d");
+    const context = canvas.getContext("2d", {
+      alpha: true,
+    });
 
     if (!context) return;
 
-    let animationFrameId = 0;
+    const drawingContext = context;
 
-    let particles: Particle[] = [];
+    let animationFrameId = 0;
+    let running = false;
+
+    let width = 0;
+    let height = 0;
+    let currentDpr = 0;
+
+    const particles: Particle[] = [];
+
+    let lastFrameTime = 0;
+
+    let inViewport = true;
+
+    let darkMode =
+      document.documentElement.classList.contains(
+        "dark",
+      );
+
+    let settings = getSettings(
+      window.innerWidth,
+    );
 
     const pointer = {
       x: -9999,
       y: -9999,
     };
 
-    const getParticleCount = () => {
-      if (window.innerWidth < 640) {
-        return 45;
-      }
+    /* =========================
+       PARTICLE CREATION
+    ========================= */
 
-      if (window.innerWidth < 1024) {
-        return 75;
-      }
-
-      return 110;
-    };
-
-    const createParticle = (
-      width: number,
-      height: number,
-    ): Particle => ({
+    const createParticle = (): Particle => ({
       x: Math.random() * width,
       y: Math.random() * height,
 
       vx:
-        (Math.random() - 0.9) *
+        (Math.random() * 2 - 1) *
         PARTICLE_SPEED,
 
       vy:
-        (Math.random() - 0.9) *
+        (Math.random() * 2 - 1) *
         PARTICLE_SPEED,
 
       radius:
         Math.random() * 2 + 1.2,
     });
 
+    /* =========================
+       CANVAS RESIZE
+    ========================= */
+
     const resizeCanvas = () => {
-      const rect =
-        canvas.getBoundingClientRect();
+      const rect = container.getBoundingClientRect();
 
-      const dpr = Math.min(
+      const newWidth = rect.width;
+      const newHeight = rect.height;
+
+      if (newWidth <= 0 || newHeight <= 0) {
+        return;
+      }
+
+      const nextSettings = getSettings(
+        window.innerWidth,
+      );
+
+      const nextDpr = Math.min(
         window.devicePixelRatio || 1,
-        2,
+        nextSettings.maxDpr,
       );
 
-      canvas.width =
-        rect.width * dpr;
+      const dimensionsChanged =
+        width !== newWidth ||
+        height !== newHeight ||
+        currentDpr !== nextDpr;
 
-      canvas.height =
-        rect.height * dpr;
+      const countChanged =
+        particles.length !==
+        nextSettings.particleCount;
 
-      context.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0,
-      );
+      settings = nextSettings;
 
-      particles = Array.from(
-        {
-          length:
-            getParticleCount(),
-        },
-        () =>
-          createParticle(
-            rect.width,
-            rect.height,
-          ),
-      );
+      if (!dimensionsChanged && !countChanged) {
+        return;
+      }
+
+      const previousWidth = width;
+      const previousHeight = height;
+
+      width = newWidth;
+      height = newHeight;
+      currentDpr = nextDpr;
+
+      if (dimensionsChanged) {
+        canvas.width = Math.round(
+          width * currentDpr,
+        );
+
+        canvas.height = Math.round(
+          height * currentDpr,
+        );
+
+        drawingContext.setTransform(
+          currentDpr,
+          0,
+          0,
+          currentDpr,
+          0,
+          0,
+        );
+      }
+
+      /* Keep existing particle positions
+         instead of recreating everything. */
+
+      if (previousWidth > 0 && previousHeight > 0) {
+        const scaleX = width / previousWidth;
+        const scaleY = height / previousHeight;
+
+        for (const particle of particles) {
+          particle.x *= scaleX;
+          particle.y *= scaleY;
+        }
+      }
+
+      /* Adjust particle count only
+         when necessary. */
+
+      if (
+        particles.length >
+        settings.particleCount
+      ) {
+        particles.length =
+          settings.particleCount;
+      }
+
+      while (
+        particles.length <
+        settings.particleCount
+      ) {
+        particles.push(createParticle());
+      }
+
+      /* Refresh the static frame if
+         animation is not running. */
+
+      if (
+        !running &&
+        inViewport &&
+        !document.hidden
+      ) {
+        render(0);
+      }
     };
 
-    const isDarkMode = () =>
-      document.documentElement.classList.contains(
-        "dark",
-      );
+    /* =========================
+       PARTICLE MOVEMENT
+    ========================= */
 
-    const draw = () => {
-      const rect =
-        canvas.getBoundingClientRect();
+    const updateParticles = (timeStep: number) => {
+      for (const particle of particles) {
+        particle.x +=
+          particle.vx * timeStep;
 
-      context.clearRect(
-        0,
-        0,
-        rect.width,
-        rect.height,
-      );
+        particle.y +=
+          particle.vy * timeStep;
 
-      const darkMode =
-        isDarkMode();
+        if (
+          particle.x <= 0 ||
+          particle.x >= width
+        ) {
+          particle.vx *= -1;
 
-      /* -------------------------
-         MOVE + DRAW PARTICLES
-      ------------------------- */
-
-      particles.forEach(
-        (particle) => {
-          if (!reduceMotion) {
-            particle.x +=
-              particle.vx;
-
-            particle.y +=
-              particle.vy;
-          }
-
-          /* Bounce horizontally */
-
-          if (
-            particle.x <= 0 ||
-            particle.x >=
-              rect.width
-          ) {
-            particle.vx *= -1;
-
-            particle.x =
-              Math.max(
-                0,
-                Math.min(
-                  particle.x,
-                  rect.width,
-                ),
-              );
-          }
-
-          /* Bounce vertically */
-
-          if (
-            particle.y <= 0 ||
-            particle.y >=
-              rect.height
-          ) {
-            particle.vy *= -1;
-
-            particle.y =
-              Math.max(
-                0,
-                Math.min(
-                  particle.y,
-                  rect.height,
-                ),
-              );
-          }
-
-          context.beginPath();
-
-          context.arc(
-            particle.x,
-            particle.y,
-            particle.radius,
+          particle.x = Math.max(
             0,
-            Math.PI * 2,
+            Math.min(width, particle.x),
           );
+        }
 
-          if (darkMode) {
-            context.fillStyle =
-              "rgba(34, 211, 238, 0.85)";
+        if (
+          particle.y <= 0 ||
+          particle.y >= height
+        ) {
+          particle.vy *= -1;
 
-            context.shadowColor =
-              "rgba(34, 211, 238, 0.75)";
+          particle.y = Math.max(
+            0,
+            Math.min(height, particle.y),
+          );
+        }
+      }
+    };
 
-            context.shadowBlur = 18;
-          } else {
-            context.fillStyle =
-              "rgba(37, 99, 235, 0.42)";
+    /* =========================
+       CANVAS DRAWING
+    ========================= */
 
-            context.shadowColor =
-              "rgba(37, 99, 235, 0.18)";
+    function render(timeStep: number) {
+      if (width <= 0 || height <= 0) {
+        return;
+      }
 
-            context.shadowBlur = 8;
-          }
-
-          context.fill();
-
-          context.shadowBlur = 0;
-        },
+      drawingContext.clearRect(
+        0,
+        0,
+        width,
+        height,
       );
+
+      if (timeStep > 0) {
+        updateParticles(timeStep);
+      }
+
+      drawingContext.lineWidth = 1;
+      drawingContext.shadowBlur = 0;
 
       /* -------------------------
          PARTICLE CONNECTIONS
@@ -310,208 +404,404 @@ export function NetworkBackground() {
       for (
         let i = 0;
         i < particles.length;
-        i += 1
+        i++
       ) {
+        const first = particles[i];
+
         for (
           let j = i + 1;
           j < particles.length;
-          j += 1
+          j++
         ) {
-          const first =
-            particles[i];
+          const second = particles[j];
 
-          const second =
-            particles[j];
+          const dx = first.x - second.x;
+          const dy = first.y - second.y;
 
-          const dx =
-            first.x - second.x;
-
-          const dy =
-            first.y - second.y;
-
-          const distance =
-            Math.sqrt(
-              dx * dx +
-                dy * dy,
-            );
+          /* Cheap early rejection:
+             avoids unnecessary square roots. */
 
           if (
-            distance <
-            CONNECTION_DISTANCE
+            Math.abs(dx) >= CONNECTION_DISTANCE ||
+            Math.abs(dy) >= CONNECTION_DISTANCE
           ) {
-            const opacity =
-              (1 -
-                distance /
-                  CONNECTION_DISTANCE) *
-              (darkMode
-                ? 0.42
-                : 0.15);
-
-            context.beginPath();
-
-            context.moveTo(
-              first.x,
-              first.y,
-            );
-
-            context.lineTo(
-              second.x,
-              second.y,
-            );
-
-            context.strokeStyle =
-              darkMode
-                ? `rgba(59, 130, 246, ${opacity})`
-                : `rgba(37, 99, 235, ${opacity})`;
-
-            context.lineWidth = 1;
-
-            context.stroke();
+            continue;
           }
+
+          const distanceSquared =
+            dx * dx + dy * dy;
+
+          if (
+            distanceSquared >=
+            CONNECTION_DISTANCE_SQUARED
+          ) {
+            continue;
+          }
+
+          const distance = Math.sqrt(
+            distanceSquared,
+          );
+
+          const opacity =
+            (1 -
+              distance / CONNECTION_DISTANCE) *
+            (darkMode ? 0.42 : 0.15);
+
+          drawingContext.beginPath();
+
+          drawingContext.moveTo(
+            first.x,
+            first.y,
+          );
+
+          drawingContext.lineTo(
+            second.x,
+            second.y,
+          );
+
+          drawingContext.strokeStyle = darkMode
+            ? `rgba(59, 130, 246, ${opacity})`
+            : `rgba(37, 99, 235, ${opacity})`;
+
+          drawingContext.stroke();
         }
 
         /* -------------------------
-           POINTER CONNECTION
+           POINTER CONNECTIONS
         ------------------------- */
 
-        const particle =
-          particles[i];
-
-        const pointerDx =
-          particle.x -
-          pointer.x;
-
-        const pointerDy =
-          particle.y -
-          pointer.y;
-
-        const pointerDistance =
-          Math.sqrt(
-            pointerDx *
-              pointerDx +
-              pointerDy *
-                pointerDy,
-          );
-
         if (
-          pointerDistance <
-          POINTER_RANGE
+          !settings.mobile &&
+          !reduceMotion
         ) {
-          const opacity =
-            (1 -
-              pointerDistance /
-                POINTER_RANGE) *
-            (darkMode
-              ? 0.48
-              : 0.2);
+          const dx = first.x - pointer.x;
+          const dy = first.y - pointer.y;
 
-          context.beginPath();
+          if (
+            Math.abs(dx) < POINTER_RANGE &&
+            Math.abs(dy) < POINTER_RANGE
+          ) {
+            const distanceSquared =
+              dx * dx + dy * dy;
 
-          context.moveTo(
-            particle.x,
-            particle.y,
-          );
+            if (
+              distanceSquared <
+              POINTER_RANGE_SQUARED
+            ) {
+              const distance = Math.sqrt(
+                distanceSquared,
+              );
 
-          context.lineTo(
-            pointer.x,
-            pointer.y,
-          );
+              const opacity =
+                (1 -
+                  distance / POINTER_RANGE) *
+                (darkMode ? 0.48 : 0.2);
 
-          context.strokeStyle =
-            darkMode
-              ? `rgba(168, 85, 247, ${opacity})`
-              : `rgba(99, 102, 241, ${opacity})`;
+              drawingContext.beginPath();
 
-          context.lineWidth = 1;
+              drawingContext.moveTo(
+                first.x,
+                first.y,
+              );
 
-          context.stroke();
+              drawingContext.lineTo(
+                pointer.x,
+                pointer.y,
+              );
+
+              drawingContext.strokeStyle = darkMode
+                ? `rgba(168, 85, 247, ${opacity})`
+                : `rgba(99, 102, 241, ${opacity})`;
+
+              drawingContext.stroke();
+            }
+          }
         }
+      }
+
+      /* -------------------------
+         DRAW PARTICLES
+      ------------------------- */
+
+      drawingContext.fillStyle = darkMode
+        ? "rgba(34, 211, 238, 0.85)"
+        : "rgba(37, 99, 235, 0.42)";
+
+      drawingContext.shadowColor = darkMode
+        ? "rgba(34, 211, 238, 0.75)"
+        : "rgba(37, 99, 235, 0.18)";
+
+      /* Lower-cost glow on desktop.
+         No particle shadow on mobile. */
+
+      drawingContext.shadowBlur = settings.mobile
+        ? 0
+        : darkMode
+          ? 10
+          : 4;
+
+      for (const particle of particles) {
+        drawingContext.beginPath();
+
+        drawingContext.arc(
+          particle.x,
+          particle.y,
+          particle.radius,
+          0,
+          Math.PI * 2,
+        );
+
+        drawingContext.fill();
+      }
+
+      drawingContext.shadowBlur = 0;
+    }
+
+    /* =========================
+       FRAME-RATE LIMITER
+    ========================= */
+
+    const animate = (timestamp: number) => {
+      if (!running) return;
+
+      const frameInterval =
+        1000 / settings.fps;
+
+      const elapsed =
+        lastFrameTime === 0
+          ? frameInterval
+          : timestamp - lastFrameTime;
+
+      if (elapsed >= frameInterval) {
+        /* Normalize movement across
+           different frame rates. */
+
+        const timeStep =
+          lastFrameTime === 0
+            ? 1
+            : Math.min(
+                elapsed / (1000 / 60),
+                3,
+              );
+
+        render(timeStep);
+
+        lastFrameTime = timestamp;
       }
 
       animationFrameId =
         window.requestAnimationFrame(
-          draw,
+          animate,
         );
     };
 
     /* =========================
-       POINTER
+       START / STOP ANIMATION
     ========================= */
+
+    const stopAnimation = () => {
+      running = false;
+
+      window.cancelAnimationFrame(
+        animationFrameId,
+      );
+
+      animationFrameId = 0;
+      lastFrameTime = 0;
+    };
+
+    const syncAnimation = () => {
+      const canDisplay =
+        inViewport && !document.hidden;
+
+      setIsHeroVisible(canDisplay);
+
+      if (!canDisplay) {
+        stopAnimation();
+        return;
+      }
+
+      /* Respect reduced-motion
+         accessibility preferences. */
+
+      if (reduceMotion) {
+        stopAnimation();
+        render(0);
+        return;
+      }
+
+      if (running) return;
+
+      running = true;
+      lastFrameTime = 0;
+
+      animationFrameId =
+        window.requestAnimationFrame(
+          animate,
+        );
+    };
+
+    /* =========================
+       POINTER INTERACTION
+    ========================= */
+
+    const resetPointer = () => {
+      pointer.x = -9999;
+      pointer.y = -9999;
+    };
 
     const handlePointerMove = (
       event: PointerEvent,
     ) => {
+      if (
+        settings.mobile ||
+        reduceMotion ||
+        !running ||
+        event.pointerType === "touch"
+      ) {
+        return;
+      }
+
       const rect =
         canvas.getBoundingClientRect();
 
-      /*
-       * Ignore pointer when it is
-       * outside the Hero canvas.
-       */
-
       if (
-        event.clientX <
-          rect.left ||
-        event.clientX >
-          rect.right ||
-        event.clientY <
-          rect.top ||
-        event.clientY >
-          rect.bottom
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom
       ) {
-        pointer.x = -9999;
-        pointer.y = -9999;
-
+        resetPointer();
         return;
       }
 
       pointer.x =
-        event.clientX -
-        rect.left;
+        event.clientX - rect.left;
 
       pointer.y =
-        event.clientY -
-        rect.top;
+        event.clientY - rect.top;
     };
 
-    const handlePointerLeave =
-      () => {
-        pointer.x = -9999;
-        pointer.y = -9999;
-      };
+    /* =========================
+       VISIBILITY OBSERVER
+    ========================= */
 
-    resizeCanvas();
+    const visibilityObserver =
+      new IntersectionObserver(
+        (entries) => {
+          inViewport =
+            entries[0]?.isIntersecting ?? false;
+
+          if (!inViewport) {
+            resetPointer();
+          }
+
+          syncAnimation();
+        },
+        {
+          threshold: 0.01,
+        },
+      );
+
+    visibilityObserver.observe(
+      container,
+    );
+
+    /* =========================
+       TAB VISIBILITY
+    ========================= */
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        resetPointer();
+      }
+
+      syncAnimation();
+    };
+
+    /* =========================
+       THEME CHANGES
+    ========================= */
+
+    const themeObserver = new MutationObserver(
+      () => {
+        darkMode =
+          document.documentElement.classList.contains(
+            "dark",
+          );
+
+        if (
+          !running &&
+          inViewport &&
+          !document.hidden
+        ) {
+          render(0);
+        }
+      },
+    );
+
+    themeObserver.observe(
+      document.documentElement,
+      {
+        attributes: true,
+        attributeFilter: ["class"],
+      },
+    );
+
+    /* =========================
+       RESIZE OBSERVER
+    ========================= */
+
+    const resizeObserver =
+      new ResizeObserver(() => {
+        resizeCanvas();
+      });
+
+    resizeObserver.observe(container);
+
+    /* =========================
+       EVENT LISTENERS
+    ========================= */
 
     window.addEventListener(
       "resize",
       resizeCanvas,
+      { passive: true },
     );
-
-    /*
-     * Listen from window instead of
-     * the canvas. This means the canvas
-     * does not block Hero buttons.
-     */
 
     window.addEventListener(
       "pointermove",
       handlePointerMove,
-      {
-        passive: true,
-      },
+      { passive: true },
     );
 
     window.addEventListener(
       "pointerleave",
-      handlePointerLeave,
+      resetPointer,
     );
 
-    draw();
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange,
+    );
+
+    /* =========================
+       INITIALIZATION
+    ========================= */
+
+    resizeCanvas();
+    syncAnimation();
+
+    /* =========================
+       CLEANUP
+    ========================= */
 
     return () => {
-      window.cancelAnimationFrame(
-        animationFrameId,
-      );
+      stopAnimation();
+
+      visibilityObserver.disconnect();
+      resizeObserver.disconnect();
+      themeObserver.disconnect();
 
       window.removeEventListener(
         "resize",
@@ -525,13 +815,30 @@ export function NetworkBackground() {
 
       window.removeEventListener(
         "pointerleave",
-        handlePointerLeave,
+        resetPointer,
+      );
+
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange,
       );
     };
   }, [reduceMotion]);
 
+  /* =========================
+     MOTION VISIBILITY
+  ========================= */
+
+  const shouldAnimate =
+    !reduceMotion && isHeroVisible;
+
+  /* =========================
+     JSX
+  ========================= */
+
   return (
     <div
+      ref={containerRef}
       className="
         pointer-events-none
         absolute
@@ -542,38 +849,30 @@ export function NetworkBackground() {
       aria-hidden="true"
     >
       {/* =========================
-          TECHNICAL GRID
-      ========================== */}
-
-
-      {/* =========================
           BLUE AMBIENT GLOW
-      ========================== */}
+      ========================= */}
 
       <motion.div
         animate={
-          reduceMotion
-            ? undefined
+          shouldAnimate
+            ? {
+                scale: [1, 1.08, 1],
+                opacity: [0.12, 0.22, 0.12],
+              }
             : {
-                scale: [
-                  1,
-                  1.08,
-                  1,
-                ],
-
-                opacity: [
-                  0.12,
-                  0.22,
-                  0.12,
-                ],
+                scale: 1,
+                opacity: 0.12,
               }
         }
-        transition={{
-          duration: 5,
-          repeat:
-            Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
+        transition={
+          shouldAnimate
+            ? {
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }
+            : { duration: 0.2 }
+        }
         className="
           absolute
           -left-[200px]
@@ -581,43 +880,38 @@ export function NetworkBackground() {
           h-[500px]
           w-[500px]
           rounded-full
-
           bg-blue-300/15
           blur-[150px]
-
           dark:bg-blue-600/15
         "
       />
 
       {/* =========================
           PURPLE AMBIENT GLOW
-      ========================== */}
+      ========================= */}
 
       <motion.div
         animate={
-          reduceMotion
-            ? undefined
+          shouldAnimate
+            ? {
+                scale: [1, 1.1, 1],
+                opacity: [0.1, 0.2, 0.1],
+              }
             : {
-                scale: [
-                  1,
-                  1.1,
-                  1,
-                ],
-
-                opacity: [
-                  0.1,
-                  0.2,
-                  0.1,
-                ],
+                scale: 1,
+                opacity: 0.1,
               }
         }
-        transition={{
-          duration: 11,
-          delay: 1,
-          repeat:
-            Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
+        transition={
+          shouldAnimate
+            ? {
+                duration: 11,
+                delay: 1,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }
+            : { duration: 0.2 }
+        }
         className="
           absolute
           -right-[200px]
@@ -625,17 +919,15 @@ export function NetworkBackground() {
           h-[520px]
           w-[520px]
           rounded-full
-
           bg-purple-300/15
           blur-[160px]
-
           dark:bg-purple-600/15
         "
       />
 
       {/* =========================
           MOVING PARTICLE NETWORK
-      ========================== */}
+      ========================= */}
 
       <canvas
         ref={canvasRef}
@@ -646,91 +938,74 @@ export function NetworkBackground() {
           z-[2]
           h-full
           w-full
-
           opacity-70
-
           dark:opacity-100
         "
       />
 
       {/* =========================
           INFRASTRUCTURE SYMBOLS
-      ========================== */}
+      ========================= */}
 
       <div className="absolute inset-0 z-[3]">
         {symbols.map(
-          ({
-            Icon,
-            left,
-            top,
-            delay,
-            duration,
-            size,
-          }) => (
+          (
+            {
+              Icon,
+              left,
+              top,
+              delay,
+              duration,
+              size,
+            },
+            index,
+          ) => (
             <motion.div
-              key={`${left}-${top}`}
-              style={{
-                left,
-                top,
-              }}
-              initial={{
-                opacity: 0,
-                scale: 0.8,
-              }}
-              animate={
+              key={index}
+              style={{ left, top }}
+              initial={
                 reduceMotion
-                  ? {
-                      opacity: 0.16,
-                      scale: 1,
-                    }
+                  ? false
                   : {
+                      opacity: 0,
+                      scale: 0.8,
+                    }
+              }
+              animate={
+                shouldAnimate
+                  ? {
                       opacity: [
                         0.08,
                         0.24,
                         0.12,
                         0.08,
                       ],
-
-                      y: [
-                        0,
-                        -12,
-                        5,
-                        0,
-                      ],
-
-                      x: [
-                        0,
-                        5,
-                        -3,
-                        0,
-                      ],
-
-                      rotate: [
-                        0,
-                        2,
-                        -2,
-                        0,
-                      ],
-
-                      scale: [
-                        1,
-                        1.06,
-                        1,
-                      ],
+                      y: [0, -12, 5, 0],
+                      x: [0, 5, -3, 0],
+                      rotate: [0, 2, -2, 0],
+                      scale: [1, 1.06, 1],
+                    }
+                  : {
+                      opacity: 0.16,
+                      x: 0,
+                      y: 0,
+                      rotate: 0,
+                      scale: 1,
                     }
               }
-              transition={{
-                duration,
-                delay,
-                repeat:
-                  Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
+              transition={
+                shouldAnimate
+                  ? {
+                      duration,
+                      delay,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }
+                  : { duration: 0.2 }
+              }
               className="
                 absolute
-
                 text-blue-600/40
-
                 dark:text-cyan-300/40
               "
             >
@@ -741,18 +1016,13 @@ export function NetworkBackground() {
                   absolute
                   left-1/2
                   top-1/2
-
                   h-14
                   w-14
-
                   -translate-x-1/2
                   -translate-y-1/2
-
                   rounded-full
-
                   bg-blue-400/10
                   blur-xl
-
                   dark:bg-cyan-400/15
                 "
               />
@@ -769,16 +1039,14 @@ export function NetworkBackground() {
 
       {/* =========================
           CONTENT VISIBILITY LAYER
-      ========================== */}
+      ========================= */}
 
       <div
         className="
           absolute
           inset-0
           z-[4]
-
           bg-[radial-gradient(circle_at_38%_48%,rgba(255,255,255,0.10)_0%,transparent_46%)]
-
           dark:bg-[radial-gradient(circle_at_38%_48%,rgba(2,6,23,0.08)_0%,transparent_50%)]
         "
       />
