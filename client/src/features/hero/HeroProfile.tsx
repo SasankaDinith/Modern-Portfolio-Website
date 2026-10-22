@@ -1,16 +1,36 @@
+
+import { useRef } from "react";
+
 import {
   motion,
+  useInView,
   useReducedMotion,
 } from "motion/react";
 
 import heroProfile from "../../assets/images/me2.webp";
 
 export function HeroProfile() {
-  const reduceMotion =
-    useReducedMotion();
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  const reduceMotion = useReducedMotion();
+
+  /* ---------------------------------------
+     Detect when Hero profile is visible.
+
+     initial: true ensures the animation
+     can begin immediately on page load.
+  --------------------------------------- */
+
+  const isInView = useInView(profileRef, {
+    amount: 0.05,
+    initial: true,
+  });
+
+  const shouldAnimate = !reduceMotion && isInView;
 
   return (
     <motion.div
+      ref={profileRef}
       className="
         group
         relative
@@ -24,24 +44,23 @@ export function HeroProfile() {
         lg:max-w-[460px]
         xl:max-w-[500px]
       "
+      /*
+       * Keep the entrance movement,
+       * but don't hide the profile
+       * image with opacity: 0.
+       */
       initial={
         reduceMotion
           ? false
           : {
-              opacity: 0,
-              scale: 0.94,
-              x: 40,
+              x: 24,
+              scale: 0.98,
             }
       }
-      animate={
-        reduceMotion
-          ? undefined
-          : {
-              opacity: 1,
-              scale: 1,
-              x: 0,
-            }
-      }
+      animate={{
+        x: 0,
+        scale: 1,
+      }}
       whileHover={
         reduceMotion
           ? undefined
@@ -51,6 +70,11 @@ export function HeroProfile() {
             }
       }
       transition={{
+        x: {
+          duration: 0.45,
+          ease: [0.22, 1, 0.36, 1],
+        },
+
         scale: {
           type: "spring",
           stiffness: 120,
@@ -62,23 +86,16 @@ export function HeroProfile() {
           type: "spring",
           stiffness: 120,
           damping: 18,
-          mass: 0.7,
-        },
-
-        opacity: {
-          duration: 0.9,
-          ease: [0.22, 1, 0.36, 1],
-        },
-
-        x: {
-          duration: 0.9,
-          ease: [0.22, 1, 0.36, 1],
         },
       }}
     >
-      {/* Outer dotted rotating ring */}
+      {/* =========================
+          OUTER ROTATING RING
+      ========================= */}
+
       <motion.div
         className="
+          pointer-events-none
           absolute
           inset-0
           rounded-full
@@ -87,23 +104,30 @@ export function HeroProfile() {
           border-blue-400/80
         "
         animate={
-          reduceMotion
-            ? undefined
+          shouldAnimate
+            ? { rotate: 360 }
+            : { rotate: 0 }
+        }
+        transition={
+          shouldAnimate
+            ? {
+                duration: 24,
+                repeat: Infinity,
+                ease: "linear",
+              }
             : {
-                rotate: 360,
+                duration: 0,
               }
         }
-        transition={{
-          duration: 24,
-          repeat:
-            Number.POSITIVE_INFINITY,
-          ease: "linear",
-        }}
       />
 
-      {/* Second dotted rotating ring */}
+      {/* =========================
+          SECOND ROTATING RING
+      ========================= */}
+
       <motion.div
         className="
+          pointer-events-none
           absolute
           inset-[5%]
           rounded-full
@@ -112,23 +136,30 @@ export function HeroProfile() {
           border-cyan-300/80
         "
         animate={
-          reduceMotion
-            ? undefined
+          shouldAnimate
+            ? { rotate: -360 }
+            : { rotate: 0 }
+        }
+        transition={
+          shouldAnimate
+            ? {
+                duration: 15,
+                repeat: Infinity,
+                ease: "linear",
+              }
             : {
-                rotate: -360,
+                duration: 0,
               }
         }
-        transition={{
-          duration: 15,
-          repeat:
-            Number.POSITIVE_INFINITY,
-          ease: "linear",
-        }}
       />
 
-      {/* Static ring */}
+      {/* =========================
+          STATIC RING
+      ========================= */}
+
       <div
         className="
+          pointer-events-none
           absolute
           inset-[9%]
           rounded-full
@@ -137,41 +168,29 @@ export function HeroProfile() {
         "
       />
 
-      {/* Animated glow */}
-      <motion.div
+      {/* =========================
+          OPTIMIZED BLUE GLOW
+
+          Static blur reduces continuous
+          filter animation workload.
+      ========================= */}
+
+      <div
         className="
+          pointer-events-none
           absolute
           inset-[12%]
           rounded-full
           bg-blue-500/20
+          opacity-40
           blur-[80px]
         "
-        animate={
-          reduceMotion
-            ? undefined
-            : {
-                opacity: [
-                  0.25,
-                  0.55,
-                  0.25,
-                ],
-
-                scale: [
-                  0.95,
-                  1.08,
-                  0.95,
-                ],
-              }
-        }
-        transition={{
-          duration: 2,
-          repeat:
-            Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
       />
 
-      {/* Profile image */}
+      {/* =========================
+          PROFILE IMAGE
+      ========================= */}
+
       <div
         className="
           absolute
@@ -192,38 +211,37 @@ export function HeroProfile() {
           group-hover:shadow-[0_0_80px_rgba(34,211,238,0.38)]
         "
       >
-        <motion.img
+        <img
           src={heroProfile}
           alt="Sasanka Ranawaka"
           width={500}
           height={500}
+          loading="eager"
           fetchPriority="high"
+          decoding="async"
           className="
             h-full
             w-full
             object-cover
             object-top
+
+            transition-transform
+            duration-500
+            ease-out
+
+            group-hover:scale-[1.025]
+            motion-reduce:transform-none
           "
-          whileHover={
-            reduceMotion
-              ? undefined
-              : {
-                  scale: 1.025,
-                }
-          }
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 40,
-            mass: 0.8,
-          }}
         />
+
+        {/* Image gradient overlay */}
 
         <div
           className="
             pointer-events-none
             absolute
             inset-0
+
             bg-gradient-to-t
             from-blue-950/40
             via-transparent
@@ -232,7 +250,10 @@ export function HeroProfile() {
         />
       </div>
 
-      {/* Available badge */}
+      {/* =========================
+          AVAILABLE BADGE
+      ========================= */}
+
       <motion.div
         className="
           absolute
@@ -245,6 +266,7 @@ export function HeroProfile() {
           gap-2.5
 
           rounded-full
+
           border
           border-cyan-400/60
 
@@ -259,7 +281,7 @@ export function HeroProfile() {
 
           shadow-[0_0_25px_rgba(34,211,238,0.22)]
 
-          backdrop-blur-xl
+          backdrop-blur-sm
         "
         initial={
           reduceMotion
@@ -278,22 +300,30 @@ export function HeroProfile() {
               }
         }
         transition={{
-          delay: 1,
-          duration: 0.6,
+          delay: 0.35,
+          duration: 0.45,
+          ease: "easeOut",
         }}
       >
+        {/* Available indicator */}
+
         <span className="relative flex h-2.5 w-2.5">
           <span
-            className="
+            className={`
               absolute
               inline-flex
               h-full
               w-full
-              animate-ping
               rounded-full
               bg-emerald-400
               opacity-60
-            "
+
+              ${
+                shouldAnimate
+                  ? "animate-ping"
+                  : ""
+              }
+            `}
           />
 
           <span
