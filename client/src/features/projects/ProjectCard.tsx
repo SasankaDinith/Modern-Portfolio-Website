@@ -1,8 +1,13 @@
+
 import {
   FaExternalLinkAlt,
   FaGithub,
 } from "react-icons/fa";
-import { motion, useReducedMotion } from "motion/react";
+
+import {
+  motion,
+  useReducedMotion,
+} from "motion/react";
 
 import type { Project } from "./projects.types";
 
@@ -17,6 +22,10 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const reduceMotion = useReducedMotion();
 
+  // Limit animation delays for large project lists.
+  const animationDelay =
+    Math.min(index, 4) * 0.04;
+
   return (
     <motion.article
       initial={
@@ -24,7 +33,7 @@ export function ProjectCard({
           ? false
           : {
               opacity: 0,
-              y: 20,
+              y: 16,
             }
       }
       whileInView={
@@ -37,12 +46,12 @@ export function ProjectCard({
       }
       viewport={{
         once: true,
-        amount: 0.15,
+        amount: 0.1,
       }}
       transition={{
-        duration: 0.5,
-        delay: index * 0.06,
-        ease: [0.22, 1, 0.36, 1],
+        duration: 0.35,
+        delay: animationDelay,
+        ease: "easeOut",
       }}
       className="
         group
@@ -51,12 +60,16 @@ export function ProjectCard({
         flex-col
         overflow-hidden
         rounded-2xl
+
         border
         border-slate-300
+
         bg-white
+
         shadow-[0_10px_30px_rgba(15,23,42,0.06)]
-        transition-all
-        duration-500
+
+        transition-colors
+        duration-300
 
         hover:border-blue-400
 
@@ -66,42 +79,62 @@ export function ProjectCard({
         dark:hover:border-cyan-400/45
       "
     >
-      {/* Image area */}
-      <div className="relative aspect-[16/9] overflow-hidden">
+      {/* =========================
+          PROJECT IMAGE
+      ========================= */}
+
+      <div className="
+        relative
+        aspect-[16/9]
+        overflow-hidden
+      ">
         <img
           src={project.image}
-          alt={project.title}
+          alt={`${project.title} project preview`}
+          width={800}
+          height={450}
           loading="lazy"
+          decoding="async"
           className="
             h-full
             w-full
             object-cover
-            transition-all
-            duration-700
+
+            transition-transform
+            duration-500
             ease-out
 
             group-hover:scale-[1.04]
-            group-hover:blur-[3px]
+
+            motion-reduce:transform-none
           "
         />
 
-        {/* Category badge */}
+        {/* =========================
+            CATEGORY BADGE
+        ========================= */}
+
         <span
           className="
             absolute
             left-5
             top-5
             z-30
+
             rounded-full
+
             border
             border-blue-300
+
             bg-white/90
+
             px-4
             py-2
+
             text-xs
             font-semibold
             text-blue-700
-            backdrop-blur-md
+
             transition-opacity
             duration-300
 
@@ -115,113 +148,172 @@ export function ProjectCard({
           {project.category}
         </span>
 
-        {/* Hover dark overlay */}
+        {/* =========================
+            OPTIMIZED DARK OVERLAY
+
+            Uses background color
+            instead of expensive blur.
+
+            Touch devices keep a subtle
+            overlay for visible buttons.
+        ========================= */}
+
         <div
           className="
             pointer-events-none
             absolute
             inset-0
             z-10
-            bg-slate-950/0
-            transition-all
-            duration-500
 
-            group-hover:bg-slate-950/65
+            bg-slate-950/40
+
+            transition-colors
+            duration-300
+
+            [@media(hover:hover)]:bg-slate-950/0
+
+            [@media(hover:hover)]:group-hover:bg-slate-950/65
+
+            [@media(hover:hover)]:group-focus-within:bg-slate-950/65
           "
         />
 
-        {/* Blur overlay */}
+        {/* =========================
+            PROJECT ACTION BUTTONS
+        ========================= */}
+
         <div
           className="
-            pointer-events-none
             absolute
             inset-0
-            z-10
-            opacity-0
-            transition-all
-            duration-500
+            z-20
 
-            group-hover:opacity-100
-            group-hover:backdrop-blur-[2px]
+            flex
+            items-center
+            justify-center
           "
-        />
-
-        {/* Hover buttons */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center">
+        >
           <div
             className="
               flex
-              translate-y-4
+              translate-y-0
               flex-wrap
               items-center
               justify-center
-              gap-4
-              opacity-0
-              transition-all
-              duration-500
+              gap-3
+              opacity-100
+
+              transition-[opacity,transform]
+              duration-300
               ease-out
 
-              group-hover:translate-y-0
-              group-hover:opacity-100
+              [@media(hover:hover)]:translate-y-4
+              [@media(hover:hover)]:opacity-0
+
+              [@media(hover:hover)]:group-hover:translate-y-0
+              [@media(hover:hover)]:group-hover:opacity-100
+
+              [@media(hover:hover)]:group-focus-within:translate-y-0
+              [@media(hover:hover)]:group-focus-within:opacity-100
             "
           >
+            {/* Live Demo */}
+
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`View live demo of ${project.title}`}
                 className="
                   inline-flex
                   items-center
                   gap-2
+
                   rounded-xl
+
                   bg-gradient-to-r
                   from-blue-600
                   to-cyan-500
-                  px-5
-                  py-3
+
+                  px-4
+                  py-2.5
+
                   text-sm
                   font-semibold
                   text-white
+
                   shadow-lg
+
                   transition-transform
-                  duration-300
+                  duration-200
 
                   hover:scale-105
+
+                  focus-visible:outline
+                  focus-visible:outline-2
+                  focus-visible:outline-offset-2
+                  focus-visible:outline-cyan-400
+
+                  motion-reduce:transform-none
                 "
               >
-                <FaExternalLinkAlt size={17} />
+                <FaExternalLinkAlt
+                  size={16}
+                  aria-hidden="true"
+                />
+
                 Live Demo
               </a>
             )}
+
+            {/* GitHub */}
 
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`View GitHub repository of ${project.title}`}
                 className="
                   inline-flex
                   items-center
                   gap-2
+
                   rounded-xl
+
                   border
                   border-white/30
-                  bg-slate-950/85
-                  px-5
-                  py-3
+
+                  bg-slate-950/90
+
+                  px-4
+                  py-2.5
+
                   text-sm
                   font-semibold
                   text-white
-                  backdrop-blur-xl
-                  transition-all
-                  duration-300
+
+                  transition-[background-color,border-color,transform]
+                  duration-200
 
                   hover:border-cyan-400
                   hover:bg-slate-900
+                  hover:scale-105
+
+                  focus-visible:outline
+                  focus-visible:outline-2
+                  focus-visible:outline-offset-2
+                  focus-visible:outline-cyan-400
+
+                  motion-reduce:transform-none
                 "
               >
-                <FaGithub size={17} />
+                <FaGithub
+                  size={16}
+                  aria-hidden="true"
+                />
+
                 GitHub
               </a>
             )}
@@ -229,78 +321,121 @@ export function ProjectCard({
         </div>
       </div>
 
-      {/* Card content */}
-<div className="flex flex-1 flex-col p-5">
-  <h3 className="space-grotesk-bold line-clamp-2 text-xl font-bold leading-7 text-slate-950 dark:text-white">
-    {project.title}
-  </h3>
+      {/* =========================
+          PROJECT CONTENT
+      ========================= */}
 
-  <p
-    className="
-      mt-3
-      line-clamp-2
-      text-sm
-      leading-6
-      text-slate-700
-      dark:text-slate-300
-    "
-  >
-    {project.description}
-  </p>
+      <div className="
+        flex
+        flex-1
+        flex-col
+        p-5
+      ">
+        {/* Project title */}
 
-  {/* Technologies */}
-  {project.technologies &&
-    project.technologies.length > 0 && (
-      <div className="mt-4 flex flex-wrap gap-2">
-        {project.technologies
-          .slice(0, 4)
-          .map((technology) => (
-            <span
-              key={technology}
+        <h3
+          className="
+            space-grotesk-bold
+            line-clamp-2
+            text-xl
+            font-bold
+            leading-7
+            text-slate-950
+            dark:text-white
+          "
+        >
+          {project.title}
+        </h3>
+
+        {/* Project description */}
+
+        <p
+          className="
+            mt-3
+            line-clamp-2
+            text-sm
+            leading-6
+            text-slate-700
+            dark:text-slate-300
+          "
+        >
+          {project.description}
+        </p>
+
+        {/* =========================
+            TECHNOLOGIES
+        ========================= */}
+
+        {project.technologies &&
+          project.technologies.length > 0 && (
+            <div
               className="
-                rounded-full
-                border
-                border-blue-200
-                bg-blue-50
-                px-3
-                py-1.5
-                text-xs
-                font-semibold
-                text-blue-700
-
-                dark:border-cyan-400/30
-                dark:bg-cyan-400/10
-                dark:text-cyan-300
+                mt-4
+                flex
+                flex-wrap
+                gap-2
               "
             >
-              {technology}
-            </span>
-          ))}
+              {project.technologies
+                .slice(0, 4)
+                .map((technology) => (
+                  <span
+                    key={technology}
+                    className="
+                      rounded-full
 
-        {project.technologies.length > 4 && (
-          <span
-            className="
-              rounded-full
-              border
-              border-purple-200
-              bg-purple-50
-              px-3
-              py-1.5
-              text-xs
-              font-semibold
-              text-purple-700
+                      border
+                      border-blue-200
 
-              dark:border-purple-400/30
-              dark:bg-purple-400/10
-              dark:text-purple-300
-            "
-          >
-            +{project.technologies.length - 4}
-          </span>
-        )}
+                      bg-blue-50
+
+                      px-3
+                      py-1.5
+
+                      text-xs
+                      font-semibold
+                      text-blue-700
+
+                      dark:border-cyan-400/30
+                      dark:bg-cyan-400/10
+                      dark:text-cyan-300
+                    "
+                  >
+                    {technology}
+                  </span>
+                ))}
+
+              {project.technologies.length >
+                4 && (
+                <span
+                  className="
+                    rounded-full
+
+                    border
+                    border-purple-200
+
+                    bg-purple-50
+
+                    px-3
+                    py-1.5
+
+                    text-xs
+                    font-semibold
+                    text-purple-700
+
+                    dark:border-purple-400/30
+                    dark:bg-purple-400/10
+                    dark:text-purple-300
+                  "
+                >
+                  +
+                  {project.technologies.length -
+                    4}
+                </span>
+              )}
+            </div>
+          )}
       </div>
-    )}
-</div>
     </motion.article>
   );
 }
